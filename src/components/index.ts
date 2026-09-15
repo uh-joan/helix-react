@@ -47,6 +47,9 @@ export type { HelixListProps, HelixListItem } from "./List/HelixList";
 export { HelixPagination } from "./Pagination/HelixPagination";
 export type { HelixPaginationProps } from "./Pagination/HelixPagination";
 
+export { HelixPaginator } from "./Pagination/HelixPaginator";
+export type { HelixPaginatorProps } from "./Pagination/HelixPaginator";
+
 export { HelixAccordion } from "./Accordion/HelixAccordion";
 export type { HelixAccordionProps, HelixAccordionItem } from "./Accordion/HelixAccordion";
 
@@ -62,6 +65,9 @@ export type { HelixRadioProps, HelixRadioGroupProps, HelixRadioOption } from "./
 
 export { HelixTooltip } from "./Tooltip/HelixTooltip";
 export type { HelixTooltipProps } from "./Tooltip/HelixTooltip";
+
+export { HelixRichTooltip } from "./Tooltip/HelixRichTooltip";
+export type { HelixRichTooltipProps } from "./Tooltip/HelixRichTooltip";
 
 export { HelixDialog } from "./Dialog/HelixDialog";
 export type { HelixDialogProps } from "./Dialog/HelixDialog";
@@ -80,10 +86,10 @@ export type { HelixSliderProps } from "./Slider/HelixSlider";
 
 // Actions & misc
 export { HelixIconButton } from "./IconButton/HelixIconButton";
-export type { HelixIconButtonProps } from "./IconButton/HelixIconButton";
+export type { HelixIconButtonProps, HelixIconButtonTone } from "./IconButton/HelixIconButton";
 
 export { HelixFab } from "./Fab/HelixFab";
-export type { HelixFabProps } from "./Fab/HelixFab";
+export type { HelixFabProps, HelixFabTone } from "./Fab/HelixFab";
 
 export { HelixButtonToggle } from "./ButtonToggle/HelixButtonToggle";
 export type { HelixButtonToggleProps, HelixToggleOption } from "./ButtonToggle/HelixButtonToggle";

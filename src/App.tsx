@@ -21,7 +21,9 @@ import {
   HelixMenuItem,
   HelixRadioGroup,
   HelixTooltip,
+  HelixRichTooltip,
   HelixDialog,
+  HelixPaginator,
   HelixAlert,
   HelixSnackbar,
   HelixProgressBar,
@@ -64,6 +66,8 @@ export function App() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
   const [date, setDate] = useState<Dayjs | null>(dayjs());
+  const [ppRows, setPpRows] = useState(10);
+  const [ppPage, setPpPage] = useState(0);
 
   return (
     <>
@@ -315,7 +319,23 @@ export function App() {
         </Section>
 
         <Section title="Pagination">
+          <Typography variant="body2" color="text.secondary">
+            Page numbers (HelixPagination)
+          </Typography>
           <HelixPagination count={8} page={page} onChange={(_e, p) => setPage(p)} color="primary" />
+          <Typography variant="body2" color="text.secondary">
+            Paginator — rows per page · X–Y of Z · first/last (HelixPaginator)
+          </Typography>
+          <HelixPaginator
+            count={97}
+            page={ppPage}
+            rowsPerPage={ppRows}
+            onPageChange={(_e, p) => setPpPage(p)}
+            onRowsPerPageChange={(e) => {
+              setPpRows(parseInt(e.target.value, 10));
+              setPpPage(0);
+            }}
+          />
         </Section>
 
         <Section title="Menu & Sidenav">
@@ -403,6 +423,9 @@ export function App() {
               <HelixIcon name="add" color="invert" size="sm" />
               <span style={{ marginLeft: 8 }}>Create</span>
             </HelixFab>
+            <HelixFab tone="ai" aria-label="Ask AI">
+              <HelixIcon name="ai-search" color="invert" />
+            </HelixFab>
           </Stack>
         </Section>
 
@@ -447,6 +470,20 @@ export function App() {
                 </HelixIconButton>
               </span>
             </HelixTooltip>
+            <HelixRichTooltip
+              title="Rich tooltip"
+              content="A light-surface tooltip with a title, body text and actions."
+              actions={
+                <>
+                  <HelixButton emphasis="basic" size="small">Dismiss</HelixButton>
+                  <HelixButton emphasis="flat" size="small">Got it</HelixButton>
+                </>
+              }
+            >
+              <span>
+                <HelixButton emphasis="stroked">Rich tooltip</HelixButton>
+              </span>
+            </HelixRichTooltip>
             <HelixButton emphasis="stroked" onClick={() => setDialogOpen(true)}>
               Open dialog
             </HelixButton>
