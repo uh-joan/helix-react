@@ -1,0 +1,11 @@
+{
+  "pkg": "helix-react",
+  "globalName": "HelixReact",
+  "shape": "package",
+  "buildCmd": "npm run build:lib",
+  "provider": { "component": "HelixProvider" },
+  "cssEntry": "src/styles/helix-fonts.css",
+  "extraFonts": ["src/styles/clarivate-font/clarivate.css"],
+  "readmeHeader": ".design-sync/conventions.md"
+}
+

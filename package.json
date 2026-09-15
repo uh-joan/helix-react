@@ -4,9 +4,15 @@
   "private": true,
   "description": "React implementation of the Helix (Clarivate) design system, built on MUI v5 from Supernova design tokens.",
   "type": "module",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:lib": "tsc -p tsconfig.build.json",
     "preview": "vite preview"
   },
   "dependencies": {

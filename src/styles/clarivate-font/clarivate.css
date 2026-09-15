@@ -1,0 +1,22 @@
+/* Clarivate brand display font, self-contained for bundling (relative urls). */
+@font-face {
+  font-family: "Clarivate Regular";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./Clarivate-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "Clarivate Regular";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./Clarivate-Bold.woff") format("woff");
+}
+@font-face {
+  font-family: "Clarivate Bold";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./Clarivate-Bold.woff") format("woff");
+}
