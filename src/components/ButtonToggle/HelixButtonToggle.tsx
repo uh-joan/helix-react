@@ -3,6 +3,7 @@ import { styled } from "@mui/material/styles";
 import ToggleButtonGroup, { type ToggleButtonGroupProps } from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
 import { palette, semantic, radius } from "../../tokens/helix-tokens";
+import { HelixIcon } from "../Icon/HelixIcon";
 
 export interface HelixToggleOption {
   value: string;
@@ -74,12 +75,17 @@ export function HelixButtonToggle({
       onChange={(_e, v) => onChange(v)}
       {...rest}
     >
-      {options.map((o) => (
-        <ToggleButton key={o.value} value={o.value} disabled={o.disabled}>
-          {o.icon}
-          {o.icon && o.label ? <span style={{ marginLeft: 6 }}>{o.label}</span> : o.label}
-        </ToggleButton>
-      ))}
+      {options.map((o) => {
+        const selected = Array.isArray(value) ? value.includes(o.value) : value === o.value;
+        // Helix: a selected icon+label segment shows a checkmark in place of its icon.
+        const icon = selected && o.icon && o.label ? <HelixIcon name="check" size="sm" /> : o.icon;
+        return (
+          <ToggleButton key={o.value} value={o.value} disabled={o.disabled}>
+            {icon}
+            {icon && o.label ? <span style={{ marginLeft: 6 }}>{o.label}</span> : o.label}
+          </ToggleButton>
+        );
+      })}
     </Group>
   );
 }

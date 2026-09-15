@@ -14,6 +14,8 @@ export interface HelixLinkProps extends Omit<LinkProps, "underline" | "color"> {
   underline?: "hover" | "permanent";
   /** Size. Default "medium". */
   size?: HelixLinkSize;
+  /** Semibold weight — recommended for inline links (with underline="permanent"). */
+  bold?: boolean;
 }
 
 const COLOUR: Record<HelixLinkColour, string> = {
@@ -34,14 +36,14 @@ const SIZE_PX: Record<HelixLinkSize, number> = {
  * inside paragraphs, and `underline="permanent"` to always underline.
  */
 export const HelixLink = forwardRef<HTMLAnchorElement, HelixLinkProps>(function HelixLink(
-  { colour = "primary", underline = "hover", size = "medium", sx, ...rest },
+  { colour = "primary", underline = "hover", size = "medium", bold = false, sx, ...rest },
   ref,
 ) {
   return (
     <MuiLink
       ref={ref}
       underline={underline === "permanent" ? "always" : "hover"}
-      sx={{ color: COLOUR[colour], fontSize: SIZE_PX[size], ...sx }}
+      sx={{ color: COLOUR[colour], fontSize: SIZE_PX[size], fontWeight: bold ? 600 : undefined, ...sx }}
       {...rest}
     />
   );

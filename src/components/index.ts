@@ -13,7 +13,7 @@ export { HelixBadge } from "./Badge/HelixBadge";
 export type { HelixBadgeProps, HelixBadgeTone, HelixBadgeSize } from "./Badge/HelixBadge";
 
 export { HelixInput } from "./Input/HelixInput";
-export type { HelixInputProps, HelixInputSize } from "./Input/HelixInput";
+export type { HelixInputProps, HelixDensity } from "./Input/HelixInput";
 
 export { HelixTextArea } from "./TextArea/HelixTextArea";
 export type { HelixTextAreaProps } from "./TextArea/HelixTextArea";
@@ -22,10 +22,10 @@ export { HelixCheckbox } from "./Checkbox/HelixCheckbox";
 export type { HelixCheckboxProps } from "./Checkbox/HelixCheckbox";
 
 export { HelixSwitch } from "./Switch/HelixSwitch";
-export type { HelixSwitchProps } from "./Switch/HelixSwitch";
+export type { HelixSwitchProps, HelixSwitchDensity } from "./Switch/HelixSwitch";
 
 export { HelixSelect } from "./Select/HelixSelect";
-export type { HelixSelectProps, HelixSelectOption, HelixSelectSize } from "./Select/HelixSelect";
+export type { HelixSelectProps, HelixSelectOption } from "./Select/HelixSelect";
 
 export { HelixChip } from "./Chip/HelixChip";
 export type { HelixChipProps, HelixChipTone, HelixChipSize } from "./Chip/HelixChip";
@@ -89,7 +89,7 @@ export type { HelixSliderProps } from "./Slider/HelixSlider";
 
 // Actions & misc
 export { HelixIconButton } from "./IconButton/HelixIconButton";
-export type { HelixIconButtonProps, HelixIconButtonTone } from "./IconButton/HelixIconButton";
+export type { HelixIconButtonProps, HelixIconButtonTone, HelixIconButtonDensity } from "./IconButton/HelixIconButton";
 
 export { HelixFab } from "./Fab/HelixFab";
 export type { HelixFabProps, HelixFabTone } from "./Fab/HelixFab";

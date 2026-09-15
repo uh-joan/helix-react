@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
 import MuiTextField, { type TextFieldProps } from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
+import { type HelixDensity, densityPadding } from "../Input/HelixInput";
 
 export interface HelixSelectOption {
   value: string | number;
@@ -8,29 +9,32 @@ export interface HelixSelectOption {
   disabled?: boolean;
 }
 
-/** Helix select density (matches HelixInput). */
-export type HelixSelectSize = "default" | "small" | "x-small";
-
 export type HelixSelectProps = Omit<TextFieldProps, "select" | "size"> & {
   /** Options to render. Alternatively, pass MenuItem children. */
   options?: HelixSelectOption[];
-  /** Density size. Default "default". */
-  size?: HelixSelectSize;
+  /** Density 0…−4. Default 0. */
+  density?: HelixDensity;
 };
 
 /**
  * Helix Select — a themed @mui/material Select (via TextField `select`).
  * Pass `options` for the common case, or MenuItem children for custom content.
+ * `density` 0…−4 for compact layouts (matches HelixInput).
  */
 export const HelixSelect = forwardRef<HTMLDivElement, HelixSelectProps>(function HelixSelect(
-  { options, children, variant = "outlined", fullWidth = true, size = "default", sx, ...rest },
+  { options, children, variant = "outlined", fullWidth = true, density = 0, sx, ...rest },
   ref,
 ) {
-  const muiSize = size === "default" ? "medium" : "small";
-  const xSmallSx =
-    size === "x-small"
-      ? { "& .MuiInputBase-input": { paddingTop: "6px", paddingBottom: "6px", fontSize: 13 } }
-      : undefined;
+  const muiSize = density === 0 ? "medium" : "small";
+  const densitySx =
+    density === 0
+      ? undefined
+      : {
+          "& .MuiInputBase-input": {
+            paddingTop: `${densityPadding(density)}px`,
+            paddingBottom: `${densityPadding(density)}px`,
+          },
+        };
   return (
     <MuiTextField
       ref={ref}
@@ -38,7 +42,7 @@ export const HelixSelect = forwardRef<HTMLDivElement, HelixSelectProps>(function
       variant={variant}
       fullWidth={fullWidth}
       size={muiSize}
-      sx={[xSmallSx, ...(Array.isArray(sx) ? sx : [sx])].filter(Boolean) as TextFieldProps["sx"]}
+      sx={[densitySx, ...(Array.isArray(sx) ? sx : [sx])].filter(Boolean) as TextFieldProps["sx"]}
       {...rest}
     >
       {options

@@ -215,6 +215,12 @@ export function App() {
             <HelixInput label="Filled" placeholder="Filled variant" variant="filled" />
             <HelixInput label="Disabled" defaultValue="Can't edit" disabled />
             <HelixTextArea label="Notes" placeholder="Add notes…" rows={3} />
+            <Typography variant="body2" color="text.secondary">
+              Density 0 / −1 / −2 / −3 / −4
+            </Typography>
+            {([0, -1, -2, -3, -4] as const).map((d) => (
+              <HelixInput key={d} label={`Density ${d}`} density={d} />
+            ))}
             <HelixSelect
               label="Fruit"
               value={fruit}

@@ -70,10 +70,10 @@ Read every component Overview page. No new bugs found; the pages confirmed every
 - **HelixSelect** — added the `size` density prop (parity with HelixInput).
 - **HelixFooter** — added the `logo-row` layout (Helix's third footer layout).
 
-## Known-minor (documented, low-priority)
-- Density beyond MUI's two sizes: Input/Select support Helix 0…−4, Icon Button 0…−3, Slide toggle 0…−2. Implemented down to −2 (x-small) where MUI allows; −3/−4 exceed MUI's density model.
-- Segmented button: Helix swaps a selected item's icon for a checkmark — not implemented (behavioural nuance).
-- Inline hyperlinks are documented as semibold + permanent underline — available via props, not defaulted.
+## Known-minor — RESOLVED (round 7)
+- **Density depth** — full Helix ranges implemented via a shared `HelixDensity`: **Input/Select `density` 0…−4** (−4 = 40px), **Icon Button `density` 0…−3** (hit-area only, icon size unchanged), **Switch `density` 0…−2**. Button (`size` 0…−3 + large) and Chip (0…−2) were already at full range. Verified: input heights step cleanly 0→−4 with correct label positioning.
+- **Segmented button** — a selected icon+label segment now swaps its icon for a **checkmark** (verified "✓ Grid").
+- **Inline hyperlink** — added `bold` (semibold) so inline links can be styled semibold + `underline="permanent"` per the guideline.
 
 ## Audit status — COMPLETE
 Reconciled against all three Supernova sources: **Figma component specs** (~50), the **`@cdx` theme SCSS**, and **every documentation page** (foundations + per-component). Plus a correctness pass (fixed an invalid DOM nesting). Remaining ceiling: cross-framework DOM (MUI vs Angular MDC), pixel values Helix doesn't publish, and dark mode (deferred). Remaining fidelity ceiling is now only: cross-framework DOM (MUI vs Angular MDC), and pixel-exact values Helix doesn't publish. **Dark mode** remains deferred.
