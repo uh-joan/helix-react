@@ -22,8 +22,8 @@ export interface HelixFooterProps {
   legalLinks?: HelixFooterLink[];
   /** Copyright line. Defaults to "© <year> Clarivate". */
   copyright?: ReactNode;
-  /** Layout of the link groups. Default "row". */
-  layout?: "row" | "column";
+  /** Layout. "row" (default), "column" (stacked), or "logo-row" (logo on its own row). */
+  layout?: "row" | "column" | "logo-row";
 }
 
 function FooterLink({ link }: { link: HelixFooterLink }) {
@@ -54,8 +54,14 @@ function FooterLink({ link }: { link: HelixFooterLink }) {
 export function HelixFooter({ linkGroups, legalLinks, copyright, layout = "row" }: HelixFooterProps) {
   const year = new Date().getFullYear();
   const column = layout === "column";
+  const logoRow = layout === "logo-row";
   return (
     <Box component="footer" sx={{ backgroundColor: semantic.surface.invert, color: semantic.text.invert, px: 4, py: 4 }}>
+      {logoRow && (
+        <Box sx={{ mb: 3 }}>
+          <HelixLogo height={24} />
+        </Box>
+      )}
       <Box
         sx={{
           display: "flex",
@@ -65,8 +71,8 @@ export function HelixFooter({ linkGroups, legalLinks, copyright, layout = "row" 
           alignItems: "flex-start",
         }}
       >
-        <HelixLogo height={24} />
-        {!column && <Box sx={{ flex: 1 }} />}
+        {!logoRow && <HelixLogo height={24} />}
+        {!column && !logoRow && <Box sx={{ flex: 1 }} />}
         {linkGroups?.map((g, i) => (
           <Box key={i} sx={{ display: "flex", flexDirection: "column", gap: 1, minWidth: 140 }}>
             <Typography sx={{ fontWeight: 600, fontSize: 14, mb: 0.5 }}>{g.title}</Typography>

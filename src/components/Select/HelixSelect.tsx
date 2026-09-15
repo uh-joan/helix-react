@@ -8,9 +8,14 @@ export interface HelixSelectOption {
   disabled?: boolean;
 }
 
-export type HelixSelectProps = Omit<TextFieldProps, "select"> & {
+/** Helix select density (matches HelixInput). */
+export type HelixSelectSize = "default" | "small" | "x-small";
+
+export type HelixSelectProps = Omit<TextFieldProps, "select" | "size"> & {
   /** Options to render. Alternatively, pass MenuItem children. */
   options?: HelixSelectOption[];
+  /** Density size. Default "default". */
+  size?: HelixSelectSize;
 };
 
 /**
@@ -18,11 +23,24 @@ export type HelixSelectProps = Omit<TextFieldProps, "select"> & {
  * Pass `options` for the common case, or MenuItem children for custom content.
  */
 export const HelixSelect = forwardRef<HTMLDivElement, HelixSelectProps>(function HelixSelect(
-  { options, children, variant = "outlined", fullWidth = true, ...rest },
+  { options, children, variant = "outlined", fullWidth = true, size = "default", sx, ...rest },
   ref,
 ) {
+  const muiSize = size === "default" ? "medium" : "small";
+  const xSmallSx =
+    size === "x-small"
+      ? { "& .MuiInputBase-input": { paddingTop: "6px", paddingBottom: "6px", fontSize: 13 } }
+      : undefined;
   return (
-    <MuiTextField ref={ref} select variant={variant} fullWidth={fullWidth} {...rest}>
+    <MuiTextField
+      ref={ref}
+      select
+      variant={variant}
+      fullWidth={fullWidth}
+      size={muiSize}
+      sx={[xSmallSx, ...(Array.isArray(sx) ? sx : [sx])].filter(Boolean) as TextFieldProps["sx"]}
+      {...rest}
+    >
       {options
         ? options.map((o) => (
             <MenuItem key={o.value} value={o.value} disabled={o.disabled}>

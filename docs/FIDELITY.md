@@ -65,8 +65,18 @@ Tab, Radio, List Item, Dialog, Breadcrumbs, Date-picker (month/year/range via MU
 ## Known-minor (MUI's two-density limit)
 The Density guideline defines deeper density support than MUI exposes: Input/Select to **−4**, Icon Button to **−3**, Slide toggle to **−2**. Implemented where it matters (Button 0…−3, Chip 0…−2); Input/Select/Chip expose default/small/x-small, and Icon Button/Switch inherit MUI sizing. Full −4 granularity is a MUI limitation, not a token gap.
 
-## Audit status
-All ~50 Supernova Figma components reconciled against their specs, plus the foundation + component documentation guidelines. Remaining fidelity ceiling is now only: cross-framework DOM (MUI vs Angular MDC), and pixel-exact values Helix doesn't publish. **Dark mode** remains deferred.
+## Fixed — audit round 6 (all component documentation pages)
+Read every component Overview page. No new bugs found; the pages confirmed every component matches its documented spec and validated earlier fixes (Icon Button `invert`, FAB `ai`/`invert`, ButtonToggle dark, Hyperlink primary/blue/visited, Header condensed/no-logo, Chip's 9 themes incl. `basic`, Tree checkboxes, Badge count/circle, mat-style Paginator, Rich Tooltip, two-table split). Two consistency wins added:
+- **HelixSelect** — added the `size` density prop (parity with HelixInput).
+- **HelixFooter** — added the `logo-row` layout (Helix's third footer layout).
+
+## Known-minor (documented, low-priority)
+- Density beyond MUI's two sizes: Input/Select support Helix 0…−4, Icon Button 0…−3, Slide toggle 0…−2. Implemented down to −2 (x-small) where MUI allows; −3/−4 exceed MUI's density model.
+- Segmented button: Helix swaps a selected item's icon for a checkmark — not implemented (behavioural nuance).
+- Inline hyperlinks are documented as semibold + permanent underline — available via props, not defaulted.
+
+## Audit status — COMPLETE
+Reconciled against all three Supernova sources: **Figma component specs** (~50), the **`@cdx` theme SCSS**, and **every documentation page** (foundations + per-component). Plus a correctness pass (fixed an invalid DOM nesting). Remaining ceiling: cross-framework DOM (MUI vs Angular MDC), pixel values Helix doesn't publish, and dark mode (deferred). Remaining fidelity ceiling is now only: cross-framework DOM (MUI vs Angular MDC), and pixel-exact values Helix doesn't publish. **Dark mode** remains deferred.
 
 ## Known gaps / not done
 - **Dark mode + invert theme** (`$helix-dark-theme`) — deferred.
