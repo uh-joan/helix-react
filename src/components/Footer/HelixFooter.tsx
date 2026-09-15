@@ -1,8 +1,6 @@
 import { type ReactNode } from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import { semantic, palette } from "../../tokens/helix-tokens";
-import { HelixLogo } from "../Logo/HelixLogo";
+import { fontFamily } from "../../tokens/helix-tokens";
 
 export interface HelixFooterLink {
   label: ReactNode;
@@ -16,15 +14,24 @@ export interface HelixFooterLinkGroup {
 }
 
 export interface HelixFooterProps {
-  /** Optional columns of links (e.g. application or resource links). */
+  /** Columns of grouped links (rendered in a responsive grid). */
   linkGroups?: HelixFooterLinkGroup[];
-  /** Legal links shown in the bottom bar. */
-  legalLinks?: HelixFooterLink[];
+  /** Flat links, shown when no `linkGroups` are given (defaults to Clarivate legal links). */
+  links?: HelixFooterLink[];
   /** Copyright line. Defaults to "© <year> Clarivate". */
   copyright?: ReactNode;
-  /** Layout. "row" (default), "column" (stacked), or "logo-row" (logo on its own row). */
-  layout?: "row" | "column" | "logo-row";
+  /** Slim padding variant (cdx-footer--slim). */
+  slim?: boolean;
 }
+
+const DEFAULT_LINKS: HelixFooterLink[] = [
+  { label: "Legal center", href: "https://clarivate.com/legal-center/" },
+  { label: "Privacy notice", href: "https://clarivate.com/privacy-center/notices-policies/privacy-policy/" },
+  { label: "Cookie policy", href: "https://clarivate.com/privacy-center/notices-policies/cookie-policy/" },
+];
+
+// Responsive column width used by cdx-footer (clamp 7.5rem…12rem).
+const COL = "clamp(7.5rem, 7.5rem + 4.5 * (100vw - 48rem) / 37, 12rem)";
 
 function FooterLink({ link }: { link: HelixFooterLink }) {
   return (
@@ -33,12 +40,12 @@ function FooterLink({ link }: { link: HelixFooterLink }) {
       href={link.href}
       onClick={link.onClick}
       sx={{
-        color: semantic.text.invert,
-        opacity: 0.85,
+        color: "inherit",
         textDecoration: "none",
-        fontSize: 13,
+        paddingTop: "3px",
+        paddingBottom: "3px",
         cursor: "pointer",
-        "&:hover": { textDecoration: "underline", opacity: 1 },
+        "&:hover": { textDecoration: "underline" },
       }}
     >
       {link.label}
@@ -47,63 +54,49 @@ function FooterLink({ link }: { link: HelixFooterLink }) {
 }
 
 /**
- * Helix Footer — the Clarivate application footer (dark surface/invert, Clarivate
- * wordmark, optional link-group columns, and a bottom bar with legal links and
- * copyright). Mirrors the @cdx/branding <cdx-footer>.
+ * Helix Footer — mirrors <cdx-footer>: a black surface with the copyright on the
+ * left (Clarivate Bold) followed by a responsive grid of link groups (or flat
+ * links). Links inherit the footer colour and underline on hover.
  */
-export function HelixFooter({ linkGroups, legalLinks, copyright, layout = "row" }: HelixFooterProps) {
+export function HelixFooter({ linkGroups, links, copyright, slim }: HelixFooterProps) {
   const year = new Date().getFullYear();
-  const column = layout === "column";
-  const logoRow = layout === "logo-row";
   return (
-    <Box component="footer" sx={{ backgroundColor: semantic.surface.invert, color: semantic.text.invert, px: 4, py: 4 }}>
-      {logoRow && (
-        <Box sx={{ mb: 3 }}>
-          <HelixLogo height={24} />
-        </Box>
-      )}
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: column ? "column" : "row",
-          flexWrap: column ? "nowrap" : "wrap",
-          gap: 4,
-          alignItems: "flex-start",
-        }}
-      >
-        {!logoRow && <HelixLogo height={24} />}
-        {!column && !logoRow && <Box sx={{ flex: 1 }} />}
-        {linkGroups?.map((g, i) => (
-          <Box key={i} sx={{ display: "flex", flexDirection: "column", gap: 1, minWidth: 140 }}>
-            <Typography sx={{ fontWeight: 600, fontSize: 14, mb: 0.5 }}>{g.title}</Typography>
-            {g.links.map((l, j) => (
-              <FooterLink key={j} link={l} />
-            ))}
-          </Box>
-        ))}
+    <Box
+      component="footer"
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: 3,
+        p: slim ? 1 : 4,
+        backgroundColor: "#000000",
+        color: "#FFFFFF",
+        fontFamily: fontFamily.base,
+        fontSize: 14,
+      }}
+    >
+      <Box sx={{ width: COL, fontFamily: fontFamily.display, fontWeight: 700, fontSize: 16 }}>
+        {copyright ?? `© ${year} Clarivate`}
       </Box>
 
-      <Box sx={{ height: "1px", backgroundColor: "rgba(255,255,255,0.16)", my: 3 }} />
-
       <Box
         sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 2,
-          alignItems: "center",
-          justifyContent: "space-between",
+          display: "grid",
+          flex: 1,
+          gap: "inherit",
+          gridTemplateColumns: `repeat(auto-fit, ${COL})`,
+          alignItems: "start",
         }}
       >
-        <Typography sx={{ fontSize: 13, color: palette.neutral[400] }}>
-          {copyright ?? `© ${year} Clarivate`}
-        </Typography>
-        {legalLinks && legalLinks.length > 0 && (
-          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
-            {legalLinks.map((l, i) => (
-              <FooterLink key={i} link={l} />
-            ))}
-          </Box>
-        )}
+        {linkGroups
+          ? linkGroups.map((g, i) => (
+              <Box key={i} sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                <Box sx={{ fontFamily: fontFamily.display, fontWeight: 700, fontSize: 16 }}>{g.title}</Box>
+                {g.links.map((l, j) => (
+                  <FooterLink key={j} link={l} />
+                ))}
+              </Box>
+            ))
+          : (links ?? DEFAULT_LINKS).map((l, i) => <FooterLink key={i} link={l} />)}
       </Box>
     </Box>
   );

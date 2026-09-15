@@ -631,11 +631,14 @@ export function App() {
         linkGroups={[
           { title: "Product", links: [{ label: "Overview", href: "#" }, { label: "Components", href: "#" }] },
           { title: "Resources", links: [{ label: "Docs", href: "#" }, { label: "Support", href: "#" }] },
-        ]}
-        legalLinks={[
-          { label: "Privacy", href: "#" },
-          { label: "Terms", href: "#" },
-          { label: "Cookie settings", href: "#" },
+          {
+            title: "Legal",
+            links: [
+              { label: "Privacy", href: "#" },
+              { label: "Terms", href: "#" },
+              { label: "Cookie settings", href: "#" },
+            ],
+          },
         ]}
       />
     </>

@@ -30,7 +30,7 @@ Tabs (4px indicator, label-large), Menu, Breadcrumbs, List, Pagination (2px, dar
 
 **Tier 3 — reasonable, with named caveats:**
 - **DataGrid (AG Grid)** — Helix theme via Theming API reproduces `@cdx/theme-ag-grid` params; verified font/weight/color/radius, not a full visual diff.
-- **Header/Footer** — real Clarivate logo + tokens; composition mirrors `<cdx-header>`/`<cdx-footer>` intent, not a pixel match.
+- **Header/Footer** — rebuilt to the real `<cdx-header>`/`<cdx-footer>` structure (round 8): Header = black global bar (white logo + global actions) over a white, elevated product bar (product name + nav); Footer = black `#000`, copyright-first (Clarivate Bold), responsive grid of link groups. Verified against the `@cdx/ngx-branding` component styles.
 - **Table** — simple MUI table for basic cases (complex grids use DataGrid).
 
 ## Fixed — audit round 1 (theme vs `@cdx`)
@@ -81,4 +81,4 @@ Reconciled against all three Supernova sources: **Figma component specs** (~50),
 ## Known gaps / not done
 - **Dark mode + invert theme** (`$helix-dark-theme`) — deferred.
 - Tier-2 → Tier-1 requires a **Helix reference render** (Storybook export or screenshots) for a true visual diff.
-- Header/Footer are not a pixel match to the `@cdx/branding` web components.
+- Header/Footer now match the `@cdx/ngx-branding` component structure (two-tier header, black copyright-first footer); remaining differences are sub-pixel MDC-vs-MUI DOM only.
