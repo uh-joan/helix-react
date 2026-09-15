@@ -279,6 +279,16 @@ export const helixTheme = createTheme({
         },
       },
     },
+    // Autocomplete — match Menu/list state layers on options.
+    MuiAutocomplete: {
+      styleOverrides: {
+        paper: { borderRadius: radius.default, backgroundColor: semantic.surface.primary },
+        option: {
+          '&[aria-selected="true"]': { backgroundColor: "rgba(42, 43, 45, 0.12)" },
+          "&.Mui-focused, &:hover": { backgroundColor: "rgba(42, 43, 45, 0.08)" },
+        },
+      },
+    },
     // Snackbar (toast) — Helix surface/invert dark container.
     MuiSnackbarContent: {
       styleOverrides: {
