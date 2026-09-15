@@ -21,18 +21,25 @@ import {
 export const helixTheme = createTheme({
   palette: {
     mode: "light",
+    // Tonal ramps taken from the Helix Angular palettes (primary neutral ramp,
+    // accent purple ramp) so hover/active/disabled states match Helix exactly
+    // instead of being derived by MUI.
     primary: {
-      main: semantic.components.primaryFilled, // #2A2B2D
+      light: "#6a6b6c", // primary/300
+      main: semantic.components.primaryFilled, // #2A2B2D (500)
+      dark: "#1f2022", // primary/700
       contrastText: semantic.text.invert,
     },
     secondary: {
-      main: semantic.components.accentFilled, // #5E33BF accent (purple)
+      light: "#8e70d2", // accent/300
+      main: semantic.components.accentFilled, // #5E33BF accent (500)
+      dark: "#4b27b1", // accent/700
       contrastText: semantic.text.invert,
     },
-    error: { main: palette.red[500], light: palette.red[100], dark: palette.red[900] },
-    success: { main: palette.green[500], light: palette.green[100], dark: palette.green[900] },
+    error: { main: palette.red[500], light: palette.red[100], dark: palette.red[900], contrastText: semantic.text.invert },
+    success: { main: palette.green[500], light: palette.green[100], dark: palette.green[900], contrastText: semantic.text.invert },
     warning: { main: palette.yellow[500], light: palette.yellow[100], dark: palette.yellow[900] },
-    info: { main: palette.blue[500], light: palette.blue[100], dark: palette.blue[900] },
+    info: { main: palette.blue[500], light: palette.blue[100], dark: palette.blue[900], contrastText: semantic.text.invert },
     grey: {
       50: palette.neutral[50],
       100: palette.neutral[100],
@@ -82,9 +89,11 @@ export const helixTheme = createTheme({
     MuiButton: {
       defaultProps: { disableElevation: true },
       styleOverrides: {
-        root: { borderRadius: radius.default, paddingInline: 16, minHeight: 36 },
-        sizeSmall: { minHeight: 32, paddingInline: 12 },
-        // Helix `.hlx-btn-large` = 56px tall, 18px/32px padding.
+        // Helix (M3, density 0): 40px container height, 2px corners, 16px inline padding.
+        root: { borderRadius: radius.default, paddingInline: 16, minHeight: 40 },
+        // Helix `.hlx-btn-small`: 6px/16px padding, 14px label.
+        sizeSmall: { minHeight: 32, paddingBlock: 6, paddingInline: 16, fontSize: fontSize.md },
+        // Helix `.hlx-btn-large`: 18px/32px padding (~56px tall).
         sizeLarge: { minHeight: 56, paddingBlock: 18, paddingInline: 32 },
         outlined: { borderColor: semantic.border.primary },
       },

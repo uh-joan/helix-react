@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { ThemeProvider, CssBaseline } from "@mui/material";
+import "./styles/fonts.css";
 import { helixTheme } from "./theme/helixTheme";
 import { App } from "./App";
 

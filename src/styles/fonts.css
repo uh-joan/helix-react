@@ -1,0 +1,29 @@
+/**
+ * Clarivate brand display font, self-hosted.
+ *
+ * Mirrors Helix's clarivate-font.css (cdn.digital-experience.clarivate.io).
+ * Self-hosted from public/fonts so the font survives environments that block
+ * external resources (e.g. Claude Design's CSP). Source Sans 3 (body) is loaded
+ * from Google Fonts in index.html — that host is allowed by the design-sync CSP.
+ */
+@font-face {
+  font-family: "Clarivate Regular";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/Clarivate-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "Clarivate Regular";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/Clarivate-Bold.woff") format("woff");
+}
+@font-face {
+  font-family: "Clarivate Bold";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/Clarivate-Bold.woff") format("woff");
+}
