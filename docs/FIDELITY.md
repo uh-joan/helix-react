@@ -58,8 +58,15 @@ Cross-checked components against `sn_get_figma_component_detail` (variants + pro
 ## Verified, no change needed (specs matched implementation)
 Tab, Radio, List Item, Dialog, Breadcrumbs, Date-picker (month/year/range via MUI), Menu, Checkbox (incl. indeterminate via MUI), Table Header/Cell (sort/align/density via HelixTable + AG Grid DataGrid), Progress Bar (determinate/indeterminate), Divider, Slide Toggle, Select / Text Input (state×density×style covered by the outlined/filled input theming).
 
+## Fixed — audit round 5 (Supernova documentation pages)
+- **Icon** — 🔴 real bug: was using **Material Icons (filled)**; Helix's Iconography guideline specifies **Material Symbols, Outline style, weight 400, GRAD 0**. Switched `HelixIcon` to the Material Symbols Outlined font with `font-variation-settings` (FILL 0 / wght 400 / GRAD 0 / opsz = size). Icons now render outlined, matching Helix.
+- Confirmed via the Badge doc ("a small circle, typically containing a number… in proximity to another object") that the round-2 Badge re-scope was correct.
+
+## Known-minor (MUI's two-density limit)
+The Density guideline defines deeper density support than MUI exposes: Input/Select to **−4**, Icon Button to **−3**, Slide toggle to **−2**. Implemented where it matters (Button 0…−3, Chip 0…−2); Input/Select/Chip expose default/small/x-small, and Icon Button/Switch inherit MUI sizing. Full −4 granularity is a MUI limitation, not a token gap.
+
 ## Audit status
-All ~50 Supernova Figma components reconciled against their specs. Remaining fidelity ceiling is now only: cross-framework DOM (MUI vs Angular MDC), and pixel-exact values Helix doesn't publish. **Dark mode** remains deferred.
+All ~50 Supernova Figma components reconciled against their specs, plus the foundation + component documentation guidelines. Remaining fidelity ceiling is now only: cross-framework DOM (MUI vs Angular MDC), and pixel-exact values Helix doesn't publish. **Dark mode** remains deferred.
 
 ## Known gaps / not done
 - **Dark mode + invert theme** (`$helix-dark-theme`) — deferred.

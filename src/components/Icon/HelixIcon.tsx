@@ -23,8 +23,8 @@ const SIZE_PX: Record<HelixIconSize, number> = { sm: 16, md: 24, lg: 32, xl: 40 
 export interface HelixIconProps {
   /**
    * Icon to render. Either a Clarivate brand icon key (ai-chat, ai-search,
-   * ai-summary, ai-compare) or a Material Icons ligature name (e.g. "search",
-   * "chevron_right", "more_vert") — Helix's icon set is Material Icons.
+   * ai-summary, ai-compare) or a Material Symbols ligature name (e.g. "search",
+   * "chevron_right", "more_vert") — Helix icon set is Material Symbols.
    */
   name: HelixBrandIconName | (string & {});
   /** Colour role. Default "primary". */
@@ -42,8 +42,8 @@ function isBrand(name: string): name is HelixBrandIconName {
 }
 
 /**
- * Helix Icon — renders the Clarivate brand SVG icons, or any Material Icons
- * ligature (the Material Icons font is loaded in index.html). Colour resolves
+ * Helix Icon — renders the Clarivate brand SVG icons, or any Material Symbols
+ * ligature (the Material Symbols Outlined font is loaded in index.html). Colour resolves
  * to the Helix Color/icon tokens.
  */
 export function HelixIcon({ name, color = "primary", size = "md", title, className, style }: HelixIconProps) {
@@ -72,8 +72,16 @@ export function HelixIcon({ name, color = "primary", size = "md", title, classNa
 
   return (
     <span
-      className={`material-icons${className ? ` ${className}` : ""}`}
-      style={{ fontSize: px, color: fill, lineHeight: 1, userSelect: "none", ...style }}
+      className={`material-symbols-outlined${className ? ` ${className}` : ""}`}
+      style={{
+        fontSize: px,
+        color: fill,
+        lineHeight: 1,
+        userSelect: "none",
+        // Helix icon axes: Outline (FILL 0), weight 400, GRAD 0, optical size tracks px.
+        fontVariationSettings: `'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' ${px}`,
+        ...style,
+      }}
       role={decorative ? undefined : "img"}
       aria-hidden={decorative || undefined}
       aria-label={title}
