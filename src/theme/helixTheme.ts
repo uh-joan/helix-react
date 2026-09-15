@@ -86,16 +86,36 @@ export const helixTheme = createTheme({
   },
 
   components: {
+    // Helix strong focus indicator (focus colour = primary/40 = #2A2B2D).
+    // MuiButtonBase is the base for Button, IconButton, Chip, Checkbox, Radio,
+    // Switch and MenuItem, so this gives them all a consistent keyboard-focus ring.
+    MuiButtonBase: {
+      styleOverrides: {
+        root: {
+          "&.Mui-focusVisible": {
+            outline: `2px solid ${semantic.text.primary}`,
+            outlineOffset: 2,
+          },
+        },
+      },
+    },
     MuiButton: {
       defaultProps: { disableElevation: true },
       styleOverrides: {
         // Helix (M3, density 0): 40px container height, 2px corners, 16px inline padding.
         root: { borderRadius: radius.default, paddingInline: 16, minHeight: 40 },
+        // Helix disabled: components/disabled #DFE1E2 fill, text/icon #BABCBE.
+        contained: { "&.Mui-disabled": { backgroundColor: semantic.components.disabled, color: palette.neutral[400] } },
+        text: { "&.Mui-disabled": { color: palette.neutral[400] } },
         // Helix `.hlx-btn-small`: 6px/16px padding, 14px label.
         sizeSmall: { minHeight: 32, paddingBlock: 6, paddingInline: 16, fontSize: fontSize.md },
         // Helix `.hlx-btn-large`: 18px/32px padding (~56px tall).
         sizeLarge: { minHeight: 56, paddingBlock: 18, paddingInline: 32 },
-        outlined: { borderColor: semantic.border.primary },
+        outlined: {
+          borderColor: semantic.border.primary,
+          // Helix disabled outline = components/disabled-outline #BABCBE.
+          "&.Mui-disabled": { borderColor: semantic.components.disabledOutline, color: palette.neutral[400] },
+        },
         // Per-tone hover "state layers", from Helix components/*-outlined_basic-hover.
         textPrimary: { "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.04)" } },
         outlinedPrimary: { "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.04)" } },
@@ -135,6 +155,40 @@ export const helixTheme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: { color: semantic.text.secondary, "&.Mui-focused": { color: semantic.text.primary } },
+      },
+    },
+    // Filled text inputs — Helix "components/text input/filled" tokens.
+    MuiFilledInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: `${radius.default}px ${radius.default}px 0 0`,
+          backgroundColor: palette.neutral[100], // filled/fill
+          "&:hover": { backgroundColor: palette.neutral[200] }, // filled/hover-fill
+          "&.Mui-focused": { backgroundColor: palette.neutral[100] },
+          "&:before": { borderBottomColor: palette.neutral[600] }, // filled/enabled-border
+          "&:hover:not(.Mui-disabled, .Mui-error):before": { borderBottomColor: palette.neutral[800] },
+          "&:after": { borderBottomColor: palette.neutral[800] }, // filled/focused-border
+          "&.Mui-error:after": { borderBottomColor: palette.red[500] },
+        },
+      },
+    },
+    // Menus / dropdowns (incl. Select panels): Helix surface + 2px corners.
+    MuiMenu: {
+      styleOverrides: {
+        paper: { backgroundColor: semantic.surface.primary, borderRadius: radius.default },
+      },
+    },
+    MuiPopover: {
+      styleOverrides: {
+        paper: { borderRadius: radius.default },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          "&:hover": { backgroundColor: "rgba(42, 43, 45, 0.08)" }, // components/ripple-hover
+          "&.Mui-selected": { backgroundColor: "rgba(42, 43, 45, 0.12)" }, // ripple-pressed_focused
+        },
       },
     },
     // Selection controls default to the primary (dark neutral) Helix colour.

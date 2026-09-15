@@ -55,7 +55,14 @@ export function App() {
             <HelixButton size="small">Small</HelixButton>
             <HelixButton size="medium">Medium</HelixButton>
             <HelixButton size="large">Large</HelixButton>
-            <HelixButton disabled>Disabled</HelixButton>
+          </Stack>
+          <Typography variant="body2" color="text.secondary">
+            Disabled (flat / stroked / basic)
+          </Typography>
+          <Stack direction="row" spacing={2} alignItems="center">
+            <HelixButton emphasis="flat" disabled>Flat</HelixButton>
+            <HelixButton emphasis="stroked" disabled>Stroked</HelixButton>
+            <HelixButton emphasis="basic" disabled>Basic</HelixButton>
           </Stack>
         </Section>
 
@@ -92,6 +99,8 @@ export function App() {
             <HelixInput label="Full name" placeholder="Jane Doe" />
             <HelixInput label="Email" placeholder="jane@clarivate.com" helperText="We'll never share it." />
             <HelixInput label="Error" defaultValue="nope" error helperText="Something's wrong" />
+            <HelixInput label="Filled" placeholder="Filled variant" variant="filled" />
+            <HelixInput label="Disabled" defaultValue="Can't edit" disabled />
             <HelixSelect
               label="Fruit"
               value={fruit}
