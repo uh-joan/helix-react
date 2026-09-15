@@ -2,6 +2,7 @@
   "pkg": "helix-react",
   "globalName": "HelixReact",
   "shape": "package",
+  "projectId": "fc4edd74-326d-4462-a3a4-54f961d71958",
   "buildCmd": "npm run build:lib",
   "provider": { "component": "HelixProvider" },
   "cssEntry": "src/styles/helix-fonts.css",
