@@ -9,6 +9,7 @@ import {
   HelixSwitch,
   HelixSelect,
   HelixChip,
+  HelixIcon,
 } from "./components";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -74,6 +75,39 @@ export function App() {
             <HelixBadge color="warning">Warning</HelixBadge>
             <HelixBadge color="negative">Negative</HelixBadge>
             <HelixBadge color="accent">Accent</HelixBadge>
+          </Stack>
+        </Section>
+
+        <Section title="Icon">
+          <Typography variant="body2" color="text.secondary">
+            Clarivate brand (AI) icons — from Supernova
+          </Typography>
+          <Stack direction="row" spacing={2} alignItems="center">
+            <HelixIcon name="ai-chat" title="AI chat" />
+            <HelixIcon name="ai-search" title="AI search" color="accent" />
+            <HelixIcon name="ai-summary" title="AI summary" color="accent" size="lg" />
+            <HelixIcon name="ai-compare" title="AI compare" color="brand" size="lg" />
+          </Stack>
+          <Typography variant="body2" color="text.secondary">
+            Material icons · colour tokens · sizes
+          </Typography>
+          <Stack direction="row" spacing={2} alignItems="center">
+            <HelixIcon name="search" />
+            <HelixIcon name="settings" color="secondary" />
+            <HelixIcon name="check_circle" color="positive" />
+            <HelixIcon name="warning" color="warn" />
+            <HelixIcon name="error" color="negative" />
+            <HelixIcon name="star" color="accent" />
+            <HelixIcon name="favorite" color="brand" size="lg" />
+            <HelixIcon name="rocket_launch" size="xl" />
+          </Stack>
+          <Stack direction="row" spacing={1} alignItems="center">
+            <HelixButton emphasis="flat" startIcon={<HelixIcon name="add" size="sm" color="invert" />}>
+              New item
+            </HelixButton>
+            <HelixButton emphasis="stroked" startIcon={<HelixIcon name="download" size="sm" />}>
+              Export
+            </HelixButton>
           </Stack>
         </Section>
 

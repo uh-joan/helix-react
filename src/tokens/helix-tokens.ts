@@ -55,6 +55,11 @@ export const semantic = {
   icon: {
     primary: palette.neutral[800],
     secondary: palette.neutral[600],
+    invert: palette.neutral[0],
+    info: palette.blue[900],
+    positive: palette.green[900],
+    negative: palette.red[500],
+    warn: palette.yellow[900],
     accent: palette.purple[600],
     brand: palette.purple[400],
     disabled: palette.neutral[400],
