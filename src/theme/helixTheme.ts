@@ -96,6 +96,8 @@ export const helixTheme = createTheme({
             outline: `2px solid ${semantic.text.primary}`,
             outlineOffset: 2,
           },
+          // Helix ripple = components/ripple-pressed_focused rgb(42 43 45 / 12%).
+          "& .MuiTouchRipple-child": { backgroundColor: "rgba(42, 43, 45, 0.12)" },
         },
       },
     },
@@ -107,6 +109,11 @@ export const helixTheme = createTheme({
         // Helix disabled: components/disabled #DFE1E2 fill, text/icon #BABCBE.
         contained: { "&.Mui-disabled": { backgroundColor: semantic.components.disabled, color: palette.neutral[400] } },
         text: { "&.Mui-disabled": { color: palette.neutral[400] } },
+        // Exact filled hover composites (state layer over container):
+        // primary → #000 (opacity 1), accent → purple+16% black, negative → red+4% black.
+        containedPrimary: { "&:hover": { backgroundColor: "#000000" } },
+        containedSecondary: { "&:hover": { backgroundColor: "#4f2ba0" } },
+        containedError: { "&:hover": { backgroundColor: "#bc2f34" } },
         // Helix `.hlx-btn-small`: 6px/16px padding, 14px label.
         sizeSmall: { minHeight: 32, paddingBlock: 6, paddingInline: 16, fontSize: fontSize.md },
         // Helix `.hlx-btn-large`: 18px/32px padding (~56px tall).
@@ -194,7 +201,22 @@ export const helixTheme = createTheme({
     // Selection controls default to the primary (dark neutral) Helix colour.
     MuiCheckbox: { defaultProps: { color: "primary" } },
     MuiRadio: { defaultProps: { color: "primary" } },
-    MuiSwitch: { defaultProps: { color: "primary" } },
+    MuiSwitch: {
+      defaultProps: { color: "primary" },
+      // Helix shows an "✕" mark on the thumb in the OFF state.
+      styleOverrides: {
+        switchBase: {
+          "&:not(.Mui-checked):not(.Mui-disabled) .MuiSwitch-thumb": {
+            backgroundColor: palette.neutral[600],
+            backgroundImage:
+              "url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23F2F2F2' d='M7.335 6.8L12 11.465L16.665 6.8L17.2 7.335L12.535 12L17.2 16.665L16.665 17.2L12 12.535L7.335 17.2L6.8 16.665L11.465 12L6.8 7.335Z'/></svg>\")",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundSize: "13px 13px",
+          },
+        },
+      },
+    },
     MuiChip: {
       // Helix chips are pill-shaped (--mat-chip-container-shape-radius: 16px).
       styleOverrides: {
