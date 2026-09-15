@@ -132,13 +132,22 @@ export function App() {
         </Section>
 
         <Section title="Badge">
-          <Stack direction="row" spacing={1.5} alignItems="center" flexWrap="wrap">
-            <HelixBadge color="neutral">Neutral</HelixBadge>
-            <HelixBadge color="info">Info</HelixBadge>
-            <HelixBadge color="positive">Positive</HelixBadge>
-            <HelixBadge color="warning">Warning</HelixBadge>
-            <HelixBadge color="negative">Negative</HelixBadge>
-            <HelixBadge color="accent">Accent</HelixBadge>
+          <Typography variant="body2" color="text.secondary">
+            Count / dot indicator — primary / accent (for status labels, use Chip)
+          </Typography>
+          <Stack direction="row" spacing={4} alignItems="center">
+            <HelixBadge badgeContent={4} tone="primary">
+              <HelixIcon name="notifications" color="secondary" />
+            </HelixBadge>
+            <HelixBadge badgeContent={12} tone="accent">
+              <HelixIcon name="mail" color="secondary" />
+            </HelixBadge>
+            <HelixBadge variant="dot" tone="accent">
+              <HelixIcon name="chat" color="secondary" />
+            </HelixBadge>
+            <HelixBadge badgeContent={3} tone="primary" size="small">
+              <HelixIcon name="shopping_cart" color="secondary" />
+            </HelixBadge>
           </Stack>
         </Section>
 
@@ -185,6 +194,7 @@ export function App() {
             <HelixChip tone="negative" label="Negative" />
             <HelixChip tone="info" label="Info" />
             <HelixChip tone="outlined" label="Outlined" />
+            <HelixChip tone="basic" label="Basic" />
           </Stack>
           <Stack direction="row" spacing={1.5} alignItems="center">
             <HelixChip tone="neutral" label="Deletable" onDelete={() => {}} />
@@ -242,8 +252,8 @@ export function App() {
                 }
               >
                 <Typography variant="body1">
-                  Combine the card with Helix buttons and badges to compose
-                  richer surfaces. <HelixBadge color="positive">New</HelixBadge>
+                  Combine the card with Helix buttons and chips to compose
+                  richer surfaces. <HelixChip tone="positive" size="small" label="New" />
                 </Typography>
               </HelixCard>
             </Box>
@@ -361,6 +371,18 @@ export function App() {
               { value: "map", icon: <HelixIcon name="map" size="sm" />, label: "Map" },
             ]}
           />
+          <Box sx={{ p: 2, backgroundColor: "#2A2B2D", borderRadius: "2px", width: "fit-content" }}>
+            <HelixButtonToggle
+              invert
+              value={view}
+              onChange={setView}
+              options={[
+                { value: "grid", label: "Grid" },
+                { value: "list", label: "List" },
+                { value: "map", label: "Map" },
+              ]}
+            />
+          </Box>
         </Section>
 
         <Section title="Icon button & FAB">
@@ -500,9 +522,11 @@ export function App() {
                 key: "status",
                 header: "Status",
                 render: (r) => (
-                  <HelixBadge color={r.status === "Active" ? "positive" : "neutral"}>
-                    {r.status as string}
-                  </HelixBadge>
+                  <HelixChip
+                    size="small"
+                    tone={r.status === "Active" ? "positive" : "neutral"}
+                    label={r.status as string}
+                  />
                 ),
               },
             ]}

@@ -14,7 +14,8 @@ export type HelixChipTone =
   | "warn"
   | "positive"
   | "info"
-  | "outlined";
+  | "outlined"
+  | "basic";
 
 /** Helix chip density. */
 export type HelixChipSize = "default" | "small" | "x-small";
@@ -35,6 +36,7 @@ const TONE_STYLES: Record<HelixChipTone, { bg: string; fg: string; border?: stri
   positive: { bg: palette.green[100], fg: semantic.text.positive }, // #D2F7D6 / #003600
   info: { bg: palette.blue[100], fg: semantic.text.info }, // #D7E8F7 / #031C40
   outlined: { bg: "transparent", fg: semantic.text.primary, border: semantic.border.primary },
+  basic: { bg: "transparent", fg: semantic.text.primary }, // text-only, no fill/border
 };
 
 /**

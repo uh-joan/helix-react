@@ -16,16 +16,22 @@ export interface HelixButtonToggleProps
   options: HelixToggleOption[];
   value: string | string[] | null;
   onChange: (value: string | string[] | null) => void;
+  /** Equal-width buttons (Helix "equal button widths"). */
+  equalWidths?: boolean;
+  /** Dark theme for dark surfaces (Helix .hlx-button-toggle-invert). */
+  invert?: boolean;
 }
 
 // Matches Helix .hlx-button-toggle-container (1px #BABCBE border, 2px radius,
 // 4px padding, surface/minimal background, 30px toggle height).
-const Group = styled(ToggleButtonGroup)({
+const Group = styled(ToggleButtonGroup, {
+  shouldForwardProp: (p) => p !== "invert" && p !== "equalWidths",
+})<{ invert?: boolean; equalWidths?: boolean }>(({ invert, equalWidths }) => ({
   width: "fit-content",
   padding: 4,
-  border: `1px solid ${palette.neutral[400]}`,
+  border: `1px solid ${invert ? "transparent" : palette.neutral[400]}`,
   borderRadius: radius.default,
-  backgroundColor: semantic.surface.minimal,
+  backgroundColor: invert ? semantic.surface.invert : semantic.surface.minimal,
   gap: 4,
   "& .MuiToggleButton-root": {
     height: 30,
@@ -33,27 +39,38 @@ const Group = styled(ToggleButtonGroup)({
     borderRadius: radius.default,
     textTransform: "none",
     fontWeight: 600,
-    color: semantic.text.secondary,
+    flex: equalWidths ? 1 : undefined,
+    color: invert ? semantic.text.invert : semantic.text.secondary,
     padding: "0 12px",
     "&.Mui-selected": {
-      backgroundColor: semantic.surface.primary,
+      backgroundColor: invert ? semantic.text.invert : semantic.surface.primary,
       color: semantic.text.primary,
       boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
-      "&:hover": { backgroundColor: semantic.surface.primary },
+      "&:hover": { backgroundColor: invert ? semantic.text.invert : semantic.surface.primary },
     },
-    "&:hover": { backgroundColor: "rgba(42, 43, 45, 0.08)" },
+    "&:hover": { backgroundColor: invert ? "rgba(255, 255, 255, 0.08)" : "rgba(42, 43, 45, 0.08)" },
   },
-});
+}));
 
 /**
  * Helix Button toggle (segmented button) — themed ToggleButtonGroup with the
  * Helix pill container. `exclusive` (default) for single-select.
  */
-export function HelixButtonToggle({ options, value, onChange, exclusive = true, ...rest }: HelixButtonToggleProps) {
+export function HelixButtonToggle({
+  options,
+  value,
+  onChange,
+  exclusive = true,
+  equalWidths,
+  invert,
+  ...rest
+}: HelixButtonToggleProps) {
   return (
     <Group
       value={value}
       exclusive={exclusive}
+      invert={invert}
+      equalWidths={equalWidths}
       onChange={(_e, v) => onChange(v)}
       {...rest}
     >

@@ -33,9 +33,21 @@ Tabs (4px indicator, label-large), Menu, Breadcrumbs, List, Pagination (2px, dar
 - **Header/Footer** — real Clarivate logo + tokens; composition mirrors `<cdx-header>`/`<cdx-footer>` intent, not a pixel match.
 - **Table** — simple MUI table for basic cases (complex grids use DataGrid).
 
-## Fixed in this audit
+## Fixed — audit round 1 (theme vs `@cdx`)
 - Progress bar height 6px → **4px** (Material default; `@cdx` doesn't override it — the 6px was an unfounded value).
 - Elevation ramp extended so **dialogs and all floating surfaces use Helix Level 3**, not MUI's default shadows.
+
+## Fixed — audit round 2 (vs Supernova Figma component specs)
+Cross-checked components against `sn_get_figma_component_detail` (variants + properties) and thumbnails. Corrections:
+- **Hyperlink** — default colour is **primary (dark)**, not accent purple. Added `colour` (primary/blue/visited), `size` (small/medium/large), `underline` (hover/permanent).
+- **Notification (Alert)** — Helix themes are **primary/positive/warn/negative** (no "info"; primary is neutral). Renamed `severity`→`theme`; added 1–2 action buttons.
+- **Badge** — **breaking, corrective**: Helix Badge is a **count/dot indicator** (themes primary/accent, sizes small/default), not a coloured status label. Re-implemented over MUI Badge. Coloured status labels are **Chip** (which has all 9 Helix themes).
+- **Chip** — added the missing **`basic`** theme (text-only). Full set now: primary/accent/neutral/outlined/negative/positive/warn/info/basic (matches Figma).
+- **ButtonToggle** — added the **`invert`** (dark) theme and `equalWidths`, per the Figma type/theme props.
+- **Card** — added the optional **close** button (Figma `close` property).
+
+## Still to reconcile (lower-signal, not yet diffed)
+Select, Text Input / Text Area, Table Header/Cell (sort states), Tree Item, Date-picker, Paginator, Header, Footer, Icon Button, FAB, Checkbox, Menu, Dialog, Breadcrumbs, Progress Bar variants — and **Rich Tooltip** (Helix has a distinct Rich Tooltip; only the plain Tooltip is implemented).
 
 ## Known gaps / not done
 - **Dark mode + invert theme** (`$helix-dark-theme`) — deferred.

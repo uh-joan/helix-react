@@ -10,7 +10,7 @@ export { HelixCard } from "./Card/HelixCard";
 export type { HelixCardProps } from "./Card/HelixCard";
 
 export { HelixBadge } from "./Badge/HelixBadge";
-export type { HelixBadgeProps, HelixBadgeColor, HelixBadgeSize } from "./Badge/HelixBadge";
+export type { HelixBadgeProps, HelixBadgeTone, HelixBadgeSize } from "./Badge/HelixBadge";
 
 export { HelixInput } from "./Input/HelixInput";
 export type { HelixInputProps, HelixInputSize } from "./Input/HelixInput";
