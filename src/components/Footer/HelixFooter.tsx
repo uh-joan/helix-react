@@ -1,7 +1,8 @@
 import { type ReactNode } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { semantic, fontFamily, palette } from "../../tokens/helix-tokens";
+import { semantic, palette } from "../../tokens/helix-tokens";
+import { HelixLogo } from "../Logo/HelixLogo";
 
 export interface HelixFooterLink {
   label: ReactNode;
@@ -53,9 +54,7 @@ export function HelixFooter({ linkGroups, legalLinks, copyright }: HelixFooterPr
   return (
     <Box component="footer" sx={{ backgroundColor: semantic.surface.invert, color: semantic.text.invert, px: 4, py: 4 }}>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 4, alignItems: "flex-start" }}>
-        <Typography component="span" sx={{ fontFamily: fontFamily.display, fontWeight: 700, fontSize: 22 }}>
-          Clarivate
-        </Typography>
+        <HelixLogo height={24} />
         <Box sx={{ flex: 1 }} />
         {linkGroups?.map((g, i) => (
           <Box key={i} sx={{ display: "flex", flexDirection: "column", gap: 1, minWidth: 140 }}>

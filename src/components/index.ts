@@ -111,6 +111,9 @@ export { HelixTree } from "./Tree/HelixTree";
 export type { HelixTreeProps, HelixTreeNode } from "./Tree/HelixTree";
 
 // Application shell
+export { HelixLogo } from "./Logo/HelixLogo";
+export type { HelixLogoProps } from "./Logo/HelixLogo";
+
 export { HelixHeader } from "./Header/HelixHeader";
 export type { HelixHeaderProps, HelixHeaderNavItem } from "./Header/HelixHeader";
 

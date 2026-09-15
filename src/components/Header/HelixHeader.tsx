@@ -3,9 +3,10 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { semantic, fontFamily } from "../../tokens/helix-tokens";
+import { semantic } from "../../tokens/helix-tokens";
 import { HelixIconButton } from "../IconButton/HelixIconButton";
 import { HelixIcon } from "../Icon/HelixIcon";
+import { HelixLogo } from "../Logo/HelixLogo";
 
 export interface HelixHeaderNavItem {
   label: ReactNode;
@@ -51,14 +52,7 @@ export function HelixHeader({ productName, nav, actions, onMenuClick, logo }: He
           </HelixIconButton>
         )}
         <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
-          {logo ?? (
-            <Typography
-              component="span"
-              sx={{ fontFamily: fontFamily.display, fontWeight: 700, fontSize: 22, lineHeight: 1 }}
-            >
-              Clarivate
-            </Typography>
-          )}
+          {logo ?? <HelixLogo height={22} />}
           {productName && (
             <>
               <Box sx={{ width: "1px", height: 24, backgroundColor: semantic.border.primary }} />
