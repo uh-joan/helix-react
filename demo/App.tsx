@@ -43,7 +43,7 @@ import {
   HelixTree,
   HelixHeader,
   HelixFooter,
-} from "./components";
+} from "../src";
 import dayjs, { type Dayjs } from "dayjs";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {

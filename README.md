@@ -18,18 +18,32 @@ Claude Design (claude.ai/design).
 ## Structure
 
 ```
-src/
+src/                       the library
+  index.ts                 public entry (components, HelixProvider, helixTheme, helixTokens)
+  HelixProvider.tsx        theme + CssBaseline + date localization (wrap your app in this)
   tokens/helix-tokens.ts   Helix tokens extracted from Supernova (source of truth)
   theme/helixTheme.ts      MUI theme mapping tokens → MUI contract
-  components/              Helix wrappers over MUI (Button, Card, Badge)
-  App.tsx                  Live demo of the components
+  components/              Helix wrappers over MUI
+demo/                      showcase app (not part of the library)
+  App.tsx  main.tsx        live demo of every component, wrapped in <HelixProvider>
+```
+
+## Usage
+
+```tsx
+import { HelixProvider, HelixButton } from "helix-react";
+
+<HelixProvider>
+  <HelixButton emphasis="flat" tone="primary">Run</HelixButton>
+</HelixProvider>
 ```
 
 ## Develop
 
 ```bash
 npm install
-npm run dev
+npm run dev        # run the demo
+npm run build:lib  # build the library (dist/ js + .d.ts)
 ```
 
 ## Design language (current)
