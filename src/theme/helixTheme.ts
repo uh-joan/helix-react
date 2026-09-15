@@ -261,10 +261,10 @@ export const helixTheme = createTheme({
         arrow: { color: palette.neutral[600] },
       },
     },
-    // Progress bar — track = surface/contrast, 6px, 2px corners.
+    // Progress bar — track = surface/contrast, Material default 4px height, 2px corners.
     MuiLinearProgress: {
       styleOverrides: {
-        root: { backgroundColor: semantic.surface.contrast, borderRadius: radius.default, height: 6 },
+        root: { backgroundColor: semantic.surface.contrast, borderRadius: radius.default, height: 4 },
         bar: { borderRadius: radius.default },
       },
     },
@@ -327,10 +327,15 @@ export const helixTheme = createTheme({
   },
 });
 
-// Overlay Helix elevation shadows onto the MUI shadow ramp (indices we use).
+// Overlay Helix elevation shadows onto the MUI shadow ramp so every surface
+// (cards, menus, popovers, dialogs) uses a Helix elevation level, not a MUI default.
 helixTheme.shadows[0] = "none";
-helixTheme.shadows[1] = elevation[1];
+helixTheme.shadows[1] = elevation[1]; // Level 1 (cards)
 helixTheme.shadows[2] = elevation[2];
-helixTheme.shadows[3] = elevation[2];
+helixTheme.shadows[3] = elevation[2]; // Level 2 (menus at 3)
 helixTheme.shadows[4] = elevation[3];
-helixTheme.shadows[8] = elevation[3];
+helixTheme.shadows[6] = elevation[3];
+helixTheme.shadows[8] = elevation[3]; // Level 3 (menus/popovers)
+helixTheme.shadows[12] = elevation[3];
+helixTheme.shadows[16] = elevation[3];
+helixTheme.shadows[24] = elevation[3]; // Level 3 (dialogs)
