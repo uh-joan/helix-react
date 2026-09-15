@@ -257,7 +257,7 @@ export function App() {
                   </>
                 }
               >
-                <Typography variant="body1">
+                <Typography variant="body1" component="div">
                   Combine the card with Helix buttons and chips to compose
                   richer surfaces. <HelixChip tone="positive" size="small" label="New" />
                 </Typography>
