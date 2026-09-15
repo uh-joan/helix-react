@@ -45,17 +45,25 @@ export function App() {
             <HelixButton emphasis="basic">Basic</HelixButton>
           </Stack>
           <Typography variant="body2" color="text.secondary">
-            Tone: primary / accent / negative
+            Tone: primary / accent / negative / ai
           </Typography>
-          <Stack direction="row" spacing={2}>
+          <Stack direction="row" spacing={2} alignItems="center">
             <HelixButton tone="primary">Primary</HelixButton>
             <HelixButton tone="accent">Accent</HelixButton>
             <HelixButton tone="negative">Negative</HelixButton>
+            <HelixButton tone="ai" startIcon={<HelixIcon name="ai-chat" size="sm" color="invert" />}>
+              Ask AI
+            </HelixButton>
           </Stack>
-          <Stack direction="row" spacing={2} alignItems="center">
-            <HelixButton size="small">Small</HelixButton>
-            <HelixButton size="medium">Medium</HelixButton>
+          <Typography variant="body2" color="text.secondary">
+            Density: large / default / small / x-small / xx-small
+          </Typography>
+          <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap" useFlexGap>
             <HelixButton size="large">Large</HelixButton>
+            <HelixButton size="default">Default</HelixButton>
+            <HelixButton size="small">Small</HelixButton>
+            <HelixButton size="x-small">X-small</HelixButton>
+            <HelixButton size="xx-small">XX-small</HelixButton>
           </Stack>
           <Typography variant="body2" color="text.secondary">
             Disabled (flat / stroked / basic)

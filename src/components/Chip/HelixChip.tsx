@@ -16,9 +16,14 @@ export type HelixChipTone =
   | "info"
   | "outlined";
 
-export interface HelixChipProps extends Omit<ChipProps, "color"> {
+/** Helix chip density. */
+export type HelixChipSize = "default" | "small" | "x-small";
+
+export interface HelixChipProps extends Omit<ChipProps, "color" | "size"> {
   /** Helix semantic tone. Default "neutral". */
   tone?: HelixChipTone;
+  /** Density size. Default "default". */
+  size?: HelixChipSize;
 }
 
 const TONE_STYLES: Record<HelixChipTone, { bg: string; fg: string; border?: string }> = {
@@ -38,18 +43,23 @@ const TONE_STYLES: Record<HelixChipTone, { bg: string; fg: string; border?: stri
  * icon, avatar, clickable, size) pass through.
  */
 export const HelixChip = forwardRef<HTMLDivElement, HelixChipProps>(function HelixChip(
-  { tone = "neutral", sx, ...rest },
+  { tone = "neutral", size = "default", sx, ...rest },
   ref,
 ) {
   const { bg, fg, border } = TONE_STYLES[tone];
+  const muiSize = size === "default" ? "medium" : "small";
+  // x-small trims below MUI's small chip density.
+  const xSmallSx = size === "x-small" ? { height: 20, fontSize: 11 } : undefined;
   return (
     <MuiChip
       ref={ref}
+      size={muiSize}
       variant={tone === "outlined" ? "outlined" : "filled"}
       sx={{
         backgroundColor: bg,
         color: fg,
         ...(border ? { borderColor: border } : {}),
+        ...(xSmallSx ?? {}),
         "& .MuiChip-deleteIcon": { color: fg, opacity: 0.7, "&:hover": { color: fg, opacity: 1 } },
         "& .MuiChip-icon": { color: fg },
         ...sx,

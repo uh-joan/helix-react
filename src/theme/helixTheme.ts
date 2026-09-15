@@ -78,11 +78,11 @@ export const helixTheme = createTheme({
     h6: { fontWeight: fontWeight.regular, fontSize: fontSize.lg, lineHeight: `${lineHeight.md}px`, letterSpacing: letterSpacing.titleSmall },
     subtitle1: { fontWeight: fontWeight.regular, fontSize: fontSize.xl, lineHeight: `${lineHeight.md}px`, letterSpacing: letterSpacing.titleMedium },
     // Body
-    body1: { fontSize: fontSize.md, lineHeight: `${lineHeight.md}px` },
-    body2: { fontSize: fontSize.sm, lineHeight: `${lineHeight.sm}px` },
+    body1: { fontSize: fontSize.md, lineHeight: `${lineHeight.md}px` }, // body-large 14/24
+    body2: { fontSize: fontSize.sm, lineHeight: `${lineHeight.sm}px`, letterSpacing: "0.4px" }, // body-small 13/16
     // Label / button → label-large (14/20, semibold, +0.1px)
     button: { fontWeight: fontWeight.semibold, fontSize: fontSize.md, lineHeight: "20px", letterSpacing: letterSpacing.label, textTransform: "none" },
-    caption: { fontSize: fontSize.xs, lineHeight: "20px" },
+    caption: { fontSize: fontSize.xs, lineHeight: "20px", fontWeight: fontWeight.semibold, letterSpacing: "0.5px" }, // label-small 12/20 semibold
   },
 
   components: {
@@ -92,8 +92,9 @@ export const helixTheme = createTheme({
     MuiButtonBase: {
       styleOverrides: {
         root: {
+          // Helix strong focus indicator = 3px solid, offset.
           "&.Mui-focusVisible": {
-            outline: `2px solid ${semantic.text.primary}`,
+            outline: `3px solid ${semantic.text.primary}`,
             outlineOffset: 2,
           },
           // Helix ripple = components/ripple-pressed_focused rgb(42 43 45 / 12%).
