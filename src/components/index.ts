@@ -15,6 +15,9 @@ export type { HelixBadgeProps, HelixBadgeTone, HelixBadgeSize } from "./Badge/He
 export { HelixInput } from "./Input/HelixInput";
 export type { HelixInputProps, HelixInputSize } from "./Input/HelixInput";
 
+export { HelixTextArea } from "./TextArea/HelixTextArea";
+export type { HelixTextAreaProps } from "./TextArea/HelixTextArea";
+
 export { HelixCheckbox } from "./Checkbox/HelixCheckbox";
 export type { HelixCheckboxProps } from "./Checkbox/HelixCheckbox";
 

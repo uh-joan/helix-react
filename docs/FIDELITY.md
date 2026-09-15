@@ -46,8 +46,20 @@ Cross-checked components against `sn_get_figma_component_detail` (variants + pro
 - **ButtonToggle** — added the **`invert`** (dark) theme and `equalWidths`, per the Figma type/theme props.
 - **Card** — added the optional **close** button (Figma `close` property).
 
-## Still to reconcile (lower-signal, not yet diffed)
-Select, Text Input / Text Area, Table Header/Cell (sort states), Tree Item, Date-picker, Paginator, Header, Footer, Icon Button, FAB, Checkbox, Menu, Dialog, Breadcrumbs, Progress Bar variants — and **Rich Tooltip** (Helix has a distinct Rich Tooltip; only the plain Tooltip is implemented).
+## Fixed — audit round 3 (Figma specs, cont.)
+- **Paginator** — added **HelixPaginator** (mat-paginator pattern: rows-per-page, X–Y of Z, first/last) via MUI TablePagination. `HelixPagination` (page numbers) kept as a separate pattern.
+- **Rich Tooltip** — added **HelixRichTooltip** (light surface, title + body + 1–2 buttons); distinct from the plain dark Tooltip.
+- **Tree** — checkbox selection **on by default** (Helix tree items have checkboxes).
+- **IconButton** — added `invert` theme. **FAB** — added `invert` + `ai` (gradient) themes.
+- **Header** — added `condensed`, `hideLogo`, and a `tabs` slot (Helix types condensed/default/no-logo + tabs).
+- **Footer** — added `layout` (row/column).
+- **Text Area** — added dedicated **HelixTextArea** (multiline, outlined/filled).
+
+## Verified, no change needed (specs matched implementation)
+Tab, Radio, List Item, Dialog, Breadcrumbs, Date-picker (month/year/range via MUI), Menu, Checkbox (incl. indeterminate via MUI), Table Header/Cell (sort/align/density via HelixTable + AG Grid DataGrid), Progress Bar (determinate/indeterminate), Divider, Slide Toggle, Select / Text Input (state×density×style covered by the outlined/filled input theming).
+
+## Audit status
+All ~50 Supernova Figma components reconciled against their specs. Remaining fidelity ceiling is now only: cross-framework DOM (MUI vs Angular MDC), and pixel-exact values Helix doesn't publish. **Dark mode** remains deferred.
 
 ## Known gaps / not done
 - **Dark mode + invert theme** (`$helix-dark-theme`) — deferred.

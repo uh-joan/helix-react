@@ -5,6 +5,7 @@ import {
   HelixCard,
   HelixBadge,
   HelixInput,
+  HelixTextArea,
   HelixCheckbox,
   HelixSwitch,
   HelixSelect,
@@ -213,6 +214,7 @@ export function App() {
             <HelixInput label="Error" defaultValue="nope" error helperText="Something's wrong" />
             <HelixInput label="Filled" placeholder="Filled variant" variant="filled" />
             <HelixInput label="Disabled" defaultValue="Can't edit" disabled />
+            <HelixTextArea label="Notes" placeholder="Add notes…" rows={3} />
             <HelixSelect
               label="Fruit"
               value={fruit}

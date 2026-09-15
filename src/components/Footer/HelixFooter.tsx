@@ -22,6 +22,8 @@ export interface HelixFooterProps {
   legalLinks?: HelixFooterLink[];
   /** Copyright line. Defaults to "© <year> Clarivate". */
   copyright?: ReactNode;
+  /** Layout of the link groups. Default "row". */
+  layout?: "row" | "column";
 }
 
 function FooterLink({ link }: { link: HelixFooterLink }) {
@@ -49,13 +51,22 @@ function FooterLink({ link }: { link: HelixFooterLink }) {
  * wordmark, optional link-group columns, and a bottom bar with legal links and
  * copyright). Mirrors the @cdx/branding <cdx-footer>.
  */
-export function HelixFooter({ linkGroups, legalLinks, copyright }: HelixFooterProps) {
+export function HelixFooter({ linkGroups, legalLinks, copyright, layout = "row" }: HelixFooterProps) {
   const year = new Date().getFullYear();
+  const column = layout === "column";
   return (
     <Box component="footer" sx={{ backgroundColor: semantic.surface.invert, color: semantic.text.invert, px: 4, py: 4 }}>
-      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 4, alignItems: "flex-start" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: column ? "column" : "row",
+          flexWrap: column ? "nowrap" : "wrap",
+          gap: 4,
+          alignItems: "flex-start",
+        }}
+      >
         <HelixLogo height={24} />
-        <Box sx={{ flex: 1 }} />
+        {!column && <Box sx={{ flex: 1 }} />}
         {linkGroups?.map((g, i) => (
           <Box key={i} sx={{ display: "flex", flexDirection: "column", gap: 1, minWidth: 140 }}>
             <Typography sx={{ fontWeight: 600, fontSize: 14, mb: 0.5 }}>{g.title}</Typography>
