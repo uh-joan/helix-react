@@ -199,6 +199,54 @@ export const helixTheme = createTheme({
         },
       },
     },
+    // Tabs — Helix active indicator = 4px; label-large, no uppercase.
+    MuiTabs: {
+      styleOverrides: {
+        indicator: { height: 4, backgroundColor: semantic.text.primary },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+          fontWeight: fontWeight.semibold,
+          fontSize: fontSize.md,
+          letterSpacing: letterSpacing.label,
+          color: semantic.text.secondary,
+          "&.Mui-selected": { color: semantic.text.primary },
+        },
+      },
+    },
+    // Accordion (expansion panel) — 2px shape, surface background, flat.
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          backgroundColor: semantic.surface.primary,
+          border: `1px solid ${semantic.border.secondary}`,
+          borderRadius: radius.default,
+          "&:before": { display: "none" },
+          "&.Mui-expanded": { margin: 0 },
+          "& + &": { borderTop: "none" },
+        },
+      },
+    },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          borderRadius: radius.default,
+          "&.Mui-selected": { backgroundColor: semantic.components.primaryFilled, color: semantic.text.invert },
+          "&.Mui-selected:hover": { backgroundColor: "#000000" },
+        },
+      },
+    },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          "&:hover": { backgroundColor: "rgba(42, 43, 45, 0.08)" },
+          "&.Mui-selected": { backgroundColor: "rgba(42, 43, 45, 0.12)", "&:hover": { backgroundColor: "rgba(42, 43, 45, 0.12)" } },
+        },
+      },
+    },
     // Selection controls default to the primary (dark neutral) Helix colour.
     MuiCheckbox: { defaultProps: { color: "primary" } },
     MuiRadio: { defaultProps: { color: "primary" } },

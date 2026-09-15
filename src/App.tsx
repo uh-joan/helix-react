@@ -10,6 +10,15 @@ import {
   HelixSelect,
   HelixChip,
   HelixIcon,
+  HelixTabs,
+  HelixBreadcrumbs,
+  HelixList,
+  HelixPagination,
+  HelixAccordion,
+  HelixStepper,
+  HelixSidenav,
+  HelixMenu,
+  HelixMenuItem,
 } from "./components";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -24,6 +33,10 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 export function App() {
   const [fruit, setFruit] = useState("apple");
+  const [tab, setTab] = useState<string | number>("overview");
+  const [page, setPage] = useState(1);
+  const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
+  const [navOpen, setNavOpen] = useState(false);
 
   return (
     <Box sx={{ maxWidth: 880, mx: "auto", p: 4 }}>
@@ -192,6 +205,94 @@ export function App() {
               </HelixCard>
             </Box>
           </Stack>
+        </Section>
+
+        <Section title="Breadcrumbs">
+          <HelixBreadcrumbs
+            items={[
+              { label: "Home", href: "#" },
+              { label: "Reports", href: "#" },
+              { label: "Q4 Summary" },
+            ]}
+          />
+        </Section>
+
+        <Section title="Tabs">
+          <HelixTabs
+            value={tab}
+            onChange={setTab}
+            tabs={[
+              { label: "Overview", value: "overview", icon: <HelixIcon name="dashboard" size="sm" /> },
+              { label: "Activity", value: "activity", icon: <HelixIcon name="timeline" size="sm" /> },
+              { label: "Settings", value: "settings", icon: <HelixIcon name="settings" size="sm" /> },
+            ]}
+          />
+          <Typography variant="body1" color="text.secondary">
+            Selected tab: {String(tab)}
+          </Typography>
+        </Section>
+
+        <Section title="List">
+          <Box sx={{ maxWidth: 360, border: "1px solid", borderColor: "divider", borderRadius: "2px" }}>
+            <HelixList
+              items={[
+                { primary: "Inbox", secondary: "12 new", leadingIcon: <HelixIcon name="inbox" color="secondary" />, onClick: () => {} },
+                { primary: "Starred", leadingIcon: <HelixIcon name="star" color="accent" />, selected: true, onClick: () => {} },
+                { primary: "Drafts", leadingIcon: <HelixIcon name="drafts" color="secondary" />, onClick: () => {} },
+              ]}
+            />
+          </Box>
+        </Section>
+
+        <Section title="Accordion">
+          <HelixAccordion
+            items={[
+              { title: "What is Helix?", children: "Clarivate's design system, here ported to React on MUI.", defaultExpanded: true },
+              { title: "How are tokens sourced?", children: "Directly from the Helix design system in Supernova." },
+              { title: "Is it production-ready?", children: "It mirrors the Angular implementation's look and API intent." },
+            ]}
+          />
+        </Section>
+
+        <Section title="Stepper">
+          <HelixStepper
+            activeStep={1}
+            steps={[{ label: "Details" }, { label: "Configure" }, { label: "Review", optional: <span>Optional</span> }]}
+          />
+        </Section>
+
+        <Section title="Pagination">
+          <HelixPagination count={8} page={page} onChange={(_e, p) => setPage(p)} color="primary" />
+        </Section>
+
+        <Section title="Menu & Sidenav">
+          <Stack direction="row" spacing={2}>
+            <HelixButton emphasis="stroked" onClick={(e) => setMenuAnchor(e.currentTarget)}>
+              Open menu
+            </HelixButton>
+            <HelixButton emphasis="flat" onClick={() => setNavOpen(true)}>
+              Open sidenav
+            </HelixButton>
+          </Stack>
+          <HelixMenu anchorEl={menuAnchor} open={Boolean(menuAnchor)} onClose={() => setMenuAnchor(null)}>
+            <HelixMenuItem onClick={() => setMenuAnchor(null)}>Profile</HelixMenuItem>
+            <HelixMenuItem onClick={() => setMenuAnchor(null)}>Settings</HelixMenuItem>
+            <HelixMenuItem onClick={() => setMenuAnchor(null)}>Sign out</HelixMenuItem>
+          </HelixMenu>
+          <HelixSidenav open={navOpen} onClose={() => setNavOpen(false)}>
+            <Box sx={{ p: 2 }}>
+              <Typography variant="h6" sx={{ mb: 1 }}>
+                Navigation
+              </Typography>
+              <HelixList
+                items={[
+                  { primary: "Dashboard", leadingIcon: <HelixIcon name="dashboard" color="secondary" />, onClick: () => setNavOpen(false) },
+                  { primary: "Reports", leadingIcon: <HelixIcon name="bar_chart" color="secondary" />, onClick: () => setNavOpen(false) },
+                  { primary: "Settings", leadingIcon: <HelixIcon name="settings" color="secondary" />, onClick: () => setNavOpen(false) },
+                ]}
+              />
+            </Box>
+          </HelixSidenav>
         </Section>
       </Stack>
     </Box>
