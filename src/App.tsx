@@ -403,12 +403,17 @@ export function App() {
         </Section>
 
         <Section title="Alert (notification)">
-          <HelixAlert severity="info" title="Heads up" onClose={() => {}}>
+          <HelixAlert
+            theme="primary"
+            title="Heads up"
+            onClose={() => {}}
+            actions={<HelixButton emphasis="basic" size="small">View</HelixButton>}
+          >
             A new report is available to view.
           </HelixAlert>
-          <HelixAlert severity="success">Your changes were saved.</HelixAlert>
-          <HelixAlert severity="warning">Your session expires in 5 minutes.</HelixAlert>
-          <HelixAlert severity="error" title="Error">Something went wrong. Try again.</HelixAlert>
+          <HelixAlert theme="positive">Your changes were saved.</HelixAlert>
+          <HelixAlert theme="warn">Your session expires in 5 minutes.</HelixAlert>
+          <HelixAlert theme="negative" title="Error">Something went wrong. Try again.</HelixAlert>
         </Section>
 
         <Section title="Tooltip · Dialog · Snackbar">
@@ -457,7 +462,11 @@ export function App() {
         </Section>
 
         <Section title="Divider · Link · Skeleton">
-          <HelixLink href="#">A Helix hyperlink</HelixLink>
+          <Stack direction="row" spacing={3}>
+            <HelixLink href="#">Primary link</HelixLink>
+            <HelixLink href="#" colour="blue">Blue link</HelixLink>
+            <HelixLink href="#" underline="permanent">Permanent underline</HelixLink>
+          </Stack>
           <HelixDivider />
           <Stack spacing={1}>
             <HelixSkeleton variant="text" width="60%" />

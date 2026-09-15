@@ -67,7 +67,7 @@ export { HelixDialog } from "./Dialog/HelixDialog";
 export type { HelixDialogProps } from "./Dialog/HelixDialog";
 
 export { HelixAlert } from "./Alert/HelixAlert";
-export type { HelixAlertProps, HelixAlertSeverity, HelixAlertVariant } from "./Alert/HelixAlert";
+export type { HelixAlertProps, HelixAlertTheme, HelixAlertVariant } from "./Alert/HelixAlert";
 
 export { HelixSnackbar } from "./Snackbar/HelixSnackbar";
 export type { HelixSnackbarProps } from "./Snackbar/HelixSnackbar";
@@ -92,7 +92,7 @@ export { HelixDivider } from "./Divider/HelixDivider";
 export type { HelixDividerProps } from "./Divider/HelixDivider";
 
 export { HelixLink } from "./Link/HelixLink";
-export type { HelixLinkProps } from "./Link/HelixLink";
+export type { HelixLinkProps, HelixLinkColour, HelixLinkSize } from "./Link/HelixLink";
 
 export { HelixSkeleton } from "./Skeleton/HelixSkeleton";
 export type { HelixSkeletonProps } from "./Skeleton/HelixSkeleton";
