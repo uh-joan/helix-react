@@ -20,4 +20,4 @@ export { HelixSelect } from "./Select/HelixSelect";
 export type { HelixSelectProps, HelixSelectOption } from "./Select/HelixSelect";
 
 export { HelixChip } from "./Chip/HelixChip";
-export type { HelixChipProps } from "./Chip/HelixChip";
+export type { HelixChipProps, HelixChipTone } from "./Chip/HelixChip";

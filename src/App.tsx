@@ -71,12 +71,19 @@ export function App() {
         </Section>
 
         <Section title="Chip">
-          <Stack direction="row" spacing={1.5} alignItems="center" flexWrap="wrap">
-            <HelixChip label="Filled" />
-            <HelixChip label="Outlined" variant="outlined" />
-            <HelixChip label="Accent" color="secondary" />
-            <HelixChip label="Deletable" onDelete={() => {}} />
-            <HelixChip label="Clickable" clickable />
+          <Stack direction="row" spacing={1.5} alignItems="center" flexWrap="wrap" useFlexGap>
+            <HelixChip tone="neutral" label="Neutral" />
+            <HelixChip tone="primary" label="Primary" />
+            <HelixChip tone="accent" label="Accent" />
+            <HelixChip tone="positive" label="Positive" />
+            <HelixChip tone="warn" label="Warning" />
+            <HelixChip tone="negative" label="Negative" />
+            <HelixChip tone="info" label="Info" />
+            <HelixChip tone="outlined" label="Outlined" />
+          </Stack>
+          <Stack direction="row" spacing={1.5} alignItems="center">
+            <HelixChip tone="neutral" label="Deletable" onDelete={() => {}} />
+            <HelixChip tone="accent" label="Clickable" clickable />
           </Stack>
         </Section>
 

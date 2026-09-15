@@ -96,6 +96,13 @@ export const helixTheme = createTheme({
         // Helix `.hlx-btn-large`: 18px/32px padding (~56px tall).
         sizeLarge: { minHeight: 56, paddingBlock: 18, paddingInline: 32 },
         outlined: { borderColor: semantic.border.primary },
+        // Per-tone hover "state layers", from Helix components/*-outlined_basic-hover.
+        textPrimary: { "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.04)" } },
+        outlinedPrimary: { "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.04)" } },
+        textSecondary: { "&:hover": { backgroundColor: palette.purple[100] } }, // accent → purple/100
+        outlinedSecondary: { "&:hover": { backgroundColor: palette.purple[100] } },
+        textError: { "&:hover": { backgroundColor: palette.red[100] } }, // negative → red/100
+        outlinedError: { "&:hover": { backgroundColor: palette.red[100] } },
       },
     },
     MuiPaper: {
