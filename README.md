@@ -38,7 +38,21 @@ npm run dev
 - **Primary:** `#2A2B2D` (dark neutral) · **Accent:** `#5E33BF` (purple)
 - **Radius:** 2px · **Elevation:** 4 levels
 
+## Components (37)
+
+- **Core:** Button, Card, Badge, Input, Checkbox, Switch, Select, Chip, Icon
+- **Navigation & structure:** Tabs, Menu, Breadcrumbs, List, Pagination, Accordion, Stepper, Sidenav
+- **Form & feedback:** Radio, Tooltip, Dialog, Alert (notification), Snackbar, Progress bar, Spinner, Slider
+- **Actions & misc:** Icon button, FAB, Button toggle (segmented), Divider, Link, Skeleton
+- **Data:** Autocomplete, Table (sortable), Date picker, Tree
+- **App shell:** Header, Footer
+
+Every component is a thin, typed wrapper over the corresponding `@mui/material`
+(or `@mui/x-*`) primitive, styled by `helixTheme` from Supernova tokens. See
+`src/App.tsx` for live usage of each. Data/date/tree components use
+`@mui/x-date-pickers` (dayjs) and `@mui/x-tree-view`.
+
 ## Roadmap
 
-Start small (Button, Card, Badge), then grow the component set (Input, Checkbox,
-Select, Dialog, Header/Footer, …) and sync to Claude Design via `/design-sync`.
+Dark mode + invert theme (`$helix-dark-theme`), then sync to Claude Design via
+`/design-sync`.

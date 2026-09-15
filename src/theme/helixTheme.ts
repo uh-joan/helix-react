@@ -247,6 +247,48 @@ export const helixTheme = createTheme({
         },
       },
     },
+    // Tooltip — Helix --mat-tooltip-container-color = neutral/600.
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          backgroundColor: palette.neutral[600],
+          color: semantic.text.invert,
+          fontSize: fontSize.sm,
+          lineHeight: "16px",
+          borderRadius: radius.default,
+          padding: "6px 8px",
+        },
+        arrow: { color: palette.neutral[600] },
+      },
+    },
+    // Progress bar — track = surface/contrast, 6px, 2px corners.
+    MuiLinearProgress: {
+      styleOverrides: {
+        root: { backgroundColor: semantic.surface.contrast, borderRadius: radius.default, height: 6 },
+        bar: { borderRadius: radius.default },
+      },
+    },
+    // Slider — rail = surface/contrast; track/thumb inherit primary.
+    MuiSlider: {
+      styleOverrides: {
+        rail: { backgroundColor: semantic.surface.contrast, opacity: 1 },
+        track: { border: "none" },
+        thumb: {
+          "&:hover, &.Mui-focusVisible": { boxShadow: "0 0 0 8px rgba(42, 43, 45, 0.08)" },
+          "&.Mui-active": { boxShadow: "0 0 0 12px rgba(42, 43, 45, 0.12)" },
+        },
+      },
+    },
+    // Snackbar (toast) — Helix surface/invert dark container.
+    MuiSnackbarContent: {
+      styleOverrides: {
+        root: {
+          backgroundColor: semantic.surface.invert,
+          color: semantic.text.invert,
+          borderRadius: radius.default,
+        },
+      },
+    },
     // Selection controls default to the primary (dark neutral) Helix colour.
     MuiCheckbox: { defaultProps: { color: "primary" } },
     MuiRadio: { defaultProps: { color: "primary" } },

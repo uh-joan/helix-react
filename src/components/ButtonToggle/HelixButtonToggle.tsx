@@ -1,0 +1,68 @@
+import { type ReactNode } from "react";
+import { styled } from "@mui/material/styles";
+import ToggleButtonGroup, { type ToggleButtonGroupProps } from "@mui/material/ToggleButtonGroup";
+import ToggleButton from "@mui/material/ToggleButton";
+import { palette, semantic, radius } from "../../tokens/helix-tokens";
+
+export interface HelixToggleOption {
+  value: string;
+  label?: ReactNode;
+  icon?: ReactNode;
+  disabled?: boolean;
+}
+
+export interface HelixButtonToggleProps
+  extends Omit<ToggleButtonGroupProps, "onChange" | "value" | "children"> {
+  options: HelixToggleOption[];
+  value: string | string[] | null;
+  onChange: (value: string | string[] | null) => void;
+}
+
+// Matches Helix .hlx-button-toggle-container (1px #BABCBE border, 2px radius,
+// 4px padding, surface/minimal background, 30px toggle height).
+const Group = styled(ToggleButtonGroup)({
+  width: "fit-content",
+  padding: 4,
+  border: `1px solid ${palette.neutral[400]}`,
+  borderRadius: radius.default,
+  backgroundColor: semantic.surface.minimal,
+  gap: 4,
+  "& .MuiToggleButton-root": {
+    height: 30,
+    border: "none",
+    borderRadius: radius.default,
+    textTransform: "none",
+    fontWeight: 600,
+    color: semantic.text.secondary,
+    padding: "0 12px",
+    "&.Mui-selected": {
+      backgroundColor: semantic.surface.primary,
+      color: semantic.text.primary,
+      boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
+      "&:hover": { backgroundColor: semantic.surface.primary },
+    },
+    "&:hover": { backgroundColor: "rgba(42, 43, 45, 0.08)" },
+  },
+});
+
+/**
+ * Helix Button toggle (segmented button) — themed ToggleButtonGroup with the
+ * Helix pill container. `exclusive` (default) for single-select.
+ */
+export function HelixButtonToggle({ options, value, onChange, exclusive = true, ...rest }: HelixButtonToggleProps) {
+  return (
+    <Group
+      value={value}
+      exclusive={exclusive}
+      onChange={(_e, v) => onChange(v)}
+      {...rest}
+    >
+      {options.map((o) => (
+        <ToggleButton key={o.value} value={o.value} disabled={o.disabled}>
+          {o.icon}
+          {o.icon && o.label ? <span style={{ marginLeft: 6 }}>{o.label}</span> : o.label}
+        </ToggleButton>
+      ))}
+    </Group>
+  );
+}

@@ -19,7 +19,28 @@ import {
   HelixSidenav,
   HelixMenu,
   HelixMenuItem,
+  HelixRadioGroup,
+  HelixTooltip,
+  HelixDialog,
+  HelixAlert,
+  HelixSnackbar,
+  HelixProgressBar,
+  HelixSpinner,
+  HelixSlider,
+  HelixIconButton,
+  HelixFab,
+  HelixButtonToggle,
+  HelixDivider,
+  HelixLink,
+  HelixSkeleton,
+  HelixAutocomplete,
+  HelixTable,
+  HelixDatePicker,
+  HelixTree,
+  HelixHeader,
+  HelixFooter,
 } from "./components";
+import dayjs, { type Dayjs } from "dayjs";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -37,9 +58,30 @@ export function App() {
   const [page, setPage] = useState(1);
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
   const [navOpen, setNavOpen] = useState(false);
+  const [plan, setPlan] = useState("standard");
+  const [view, setView] = useState<string | string[] | null>("grid");
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [snackOpen, setSnackOpen] = useState(false);
+  const [date, setDate] = useState<Dayjs | null>(dayjs());
 
   return (
-    <Box sx={{ maxWidth: 880, mx: "auto", p: 4 }}>
+    <>
+      <HelixHeader
+        productName="Design System"
+        nav={[{ label: "Overview", active: true }, { label: "Components" }, { label: "Tokens" }]}
+        onMenuClick={() => setNavOpen(true)}
+        actions={
+          <>
+            <HelixIconButton aria-label="Search">
+              <HelixIcon name="search" />
+            </HelixIconButton>
+            <HelixIconButton aria-label="Account">
+              <HelixIcon name="account_circle" />
+            </HelixIconButton>
+          </>
+        }
+      />
+      <Box sx={{ maxWidth: 880, mx: "auto", p: 4 }}>
       <Stack spacing={1} sx={{ mb: 4 }}>
         <Typography variant="h1">Helix React</Typography>
         <Typography variant="body1" color="text.secondary">
@@ -294,7 +336,204 @@ export function App() {
             </Box>
           </HelixSidenav>
         </Section>
+
+        <Section title="Radio">
+          <HelixRadioGroup
+            label="Plan"
+            value={plan}
+            onChange={setPlan}
+            options={[
+              { value: "standard", label: "Standard" },
+              { value: "pro", label: "Pro" },
+              { value: "enterprise", label: "Enterprise", disabled: true },
+            ]}
+          />
+        </Section>
+
+        <Section title="Button toggle (segmented)">
+          <HelixButtonToggle
+            value={view}
+            onChange={setView}
+            options={[
+              { value: "grid", icon: <HelixIcon name="grid_view" size="sm" />, label: "Grid" },
+              { value: "list", icon: <HelixIcon name="view_list" size="sm" />, label: "List" },
+              { value: "map", icon: <HelixIcon name="map" size="sm" />, label: "Map" },
+            ]}
+          />
+        </Section>
+
+        <Section title="Icon button & FAB">
+          <Stack direction="row" spacing={2} alignItems="center">
+            <HelixIconButton aria-label="Edit">
+              <HelixIcon name="edit" />
+            </HelixIconButton>
+            <HelixIconButton tone="accent" aria-label="Favorite">
+              <HelixIcon name="favorite" />
+            </HelixIconButton>
+            <HelixIconButton tone="negative" aria-label="Delete">
+              <HelixIcon name="delete" />
+            </HelixIconButton>
+            <HelixFab tone="accent" size="small" aria-label="Add">
+              <HelixIcon name="add" color="invert" />
+            </HelixFab>
+            <HelixFab tone="accent" variant="extended">
+              <HelixIcon name="add" color="invert" size="sm" />
+              <span style={{ marginLeft: 8 }}>Create</span>
+            </HelixFab>
+          </Stack>
+        </Section>
+
+        <Section title="Slider">
+          <Box sx={{ maxWidth: 360 }}>
+            <HelixSlider defaultValue={40} valueLabelDisplay="auto" />
+            <HelixSlider defaultValue={[20, 70]} valueLabelDisplay="auto" />
+          </Box>
+        </Section>
+
+        <Section title="Progress">
+          <Box sx={{ maxWidth: 360 }}>
+            <HelixProgressBar variant="determinate" value={60} />
+          </Box>
+          <HelixProgressBar sx={{ maxWidth: 360 }} />
+          <Stack direction="row" spacing={2} alignItems="center">
+            <HelixSpinner />
+            <HelixSpinner variant="determinate" value={70} />
+          </Stack>
+        </Section>
+
+        <Section title="Alert (notification)">
+          <HelixAlert severity="info" title="Heads up" onClose={() => {}}>
+            A new report is available to view.
+          </HelixAlert>
+          <HelixAlert severity="success">Your changes were saved.</HelixAlert>
+          <HelixAlert severity="warning">Your session expires in 5 minutes.</HelixAlert>
+          <HelixAlert severity="error" title="Error">Something went wrong. Try again.</HelixAlert>
+        </Section>
+
+        <Section title="Tooltip · Dialog · Snackbar">
+          <Stack direction="row" spacing={2} alignItems="center">
+            <HelixTooltip title="More information" arrow>
+              <span>
+                <HelixIconButton aria-label="Info">
+                  <HelixIcon name="info" color="secondary" />
+                </HelixIconButton>
+              </span>
+            </HelixTooltip>
+            <HelixButton emphasis="stroked" onClick={() => setDialogOpen(true)}>
+              Open dialog
+            </HelixButton>
+            <HelixButton emphasis="flat" onClick={() => setSnackOpen(true)}>
+              Show snackbar
+            </HelixButton>
+          </Stack>
+          <HelixDialog
+            open={dialogOpen}
+            onClose={() => setDialogOpen(false)}
+            title="Delete report?"
+            actions={
+              <>
+                <HelixButton emphasis="basic" onClick={() => setDialogOpen(false)}>
+                  Cancel
+                </HelixButton>
+                <HelixButton tone="negative" onClick={() => setDialogOpen(false)}>
+                  Delete
+                </HelixButton>
+              </>
+            }
+          >
+            This action can't be undone. The report and its data will be permanently removed.
+          </HelixDialog>
+          <HelixSnackbar
+            open={snackOpen}
+            onClose={() => setSnackOpen(false)}
+            message="Report deleted"
+            action={
+              <HelixButton emphasis="basic" tone="invert" size="small" onClick={() => setSnackOpen(false)}>
+                Undo
+              </HelixButton>
+            }
+          />
+        </Section>
+
+        <Section title="Divider · Link · Skeleton">
+          <HelixLink href="#">A Helix hyperlink</HelixLink>
+          <HelixDivider />
+          <Stack spacing={1}>
+            <HelixSkeleton variant="text" width="60%" />
+            <HelixSkeleton variant="rectangular" height={48} />
+            <Stack direction="row" spacing={1} alignItems="center">
+              <HelixSkeleton variant="circular" width={40} height={40} />
+              <HelixSkeleton variant="text" width={160} />
+            </Stack>
+          </Stack>
+        </Section>
+
+        <Section title="Autocomplete · Date picker">
+          <Box sx={{ maxWidth: 360 }}>
+            <HelixAutocomplete
+              label="Country"
+              options={["United States", "United Kingdom", "Spain", "Germany", "Japan"]}
+            />
+          </Box>
+          <Box sx={{ maxWidth: 360 }}>
+            <HelixDatePicker label="Report date" value={date} onChange={setDate} />
+          </Box>
+        </Section>
+
+        <Section title="Table">
+          <HelixTable
+            columns={[
+              { key: "name", header: "Name", sortable: true },
+              { key: "role", header: "Role", sortable: true },
+              { key: "score", header: "Score", align: "right", sortable: true },
+              {
+                key: "status",
+                header: "Status",
+                render: (r) => (
+                  <HelixBadge color={r.status === "Active" ? "positive" : "neutral"}>
+                    {r.status as string}
+                  </HelixBadge>
+                ),
+              },
+            ]}
+            rows={[
+              { name: "Ada Lovelace", role: "Analyst", score: 92, status: "Active" },
+              { name: "Alan Turing", role: "Researcher", score: 88, status: "Active" },
+              { name: "Grace Hopper", role: "Engineer", score: 95, status: "Inactive" },
+            ]}
+            getRowKey={(r) => r.name as string}
+          />
+        </Section>
+
+        <Section title="Tree">
+          <HelixTree
+            defaultExpandedItems={["reports"]}
+            items={[
+              {
+                id: "reports",
+                label: "Reports",
+                children: [
+                  { id: "q3", label: "Q3 Summary" },
+                  { id: "q4", label: "Q4 Summary" },
+                ],
+              },
+              { id: "settings", label: "Settings", children: [{ id: "profile", label: "Profile" }] },
+            ]}
+          />
+        </Section>
       </Stack>
-    </Box>
+      </Box>
+      <HelixFooter
+        linkGroups={[
+          { title: "Product", links: [{ label: "Overview", href: "#" }, { label: "Components", href: "#" }] },
+          { title: "Resources", links: [{ label: "Docs", href: "#" }, { label: "Support", href: "#" }] },
+        ]}
+        legalLinks={[
+          { label: "Privacy", href: "#" },
+          { label: "Terms", href: "#" },
+          { label: "Cookie settings", href: "#" },
+        ]}
+      />
+    </>
   );
 }
