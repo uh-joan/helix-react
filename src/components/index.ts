@@ -104,6 +104,9 @@ export type { HelixAutocompleteProps } from "./Autocomplete/HelixAutocomplete";
 export { HelixTable } from "./Table/HelixTable";
 export type { HelixTableProps, HelixColumn } from "./Table/HelixTable";
 
+export { HelixDataGrid, helixGridTheme } from "./DataGrid/HelixDataGrid";
+export type { HelixDataGridProps } from "./DataGrid/HelixDataGrid";
+
 export { HelixDatePicker } from "./DatePicker/HelixDatePicker";
 export type { HelixDatePickerProps } from "./DatePicker/HelixDatePicker";
 

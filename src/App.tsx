@@ -35,6 +35,7 @@ import {
   HelixSkeleton,
   HelixAutocomplete,
   HelixTable,
+  HelixDataGrid,
   HelixDatePicker,
   HelixTree,
   HelixHeader,
@@ -502,6 +503,31 @@ export function App() {
               { name: "Grace Hopper", role: "Engineer", score: 95, status: "Inactive" },
             ]}
             getRowKey={(r) => r.name as string}
+          />
+        </Section>
+
+        <Section title="Data grid (AG Grid)">
+          <Typography variant="body2" color="text.secondary">
+            Complex grid — sortable, filterable, resizable, paginated
+          </Typography>
+          <HelixDataGrid
+            height={320}
+            pagination
+            paginationPageSize={5}
+            rowData={[
+              { name: "Ada Lovelace", role: "Analyst", score: 92, status: "Active" },
+              { name: "Alan Turing", role: "Researcher", score: 88, status: "Active" },
+              { name: "Grace Hopper", role: "Engineer", score: 95, status: "Inactive" },
+              { name: "Katherine Johnson", role: "Mathematician", score: 99, status: "Active" },
+              { name: "Edsger Dijkstra", role: "Engineer", score: 91, status: "Inactive" },
+              { name: "Barbara Liskov", role: "Researcher", score: 97, status: "Active" },
+            ]}
+            columnDefs={[
+              { field: "name", headerName: "Name" },
+              { field: "role", headerName: "Role" },
+              { field: "score", headerName: "Score", type: "numericColumn", maxWidth: 120 },
+              { field: "status", headerName: "Status" },
+            ]}
           />
         </Section>
 
