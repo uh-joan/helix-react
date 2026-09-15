@@ -8,7 +8,7 @@ How faithfully each component reproduces Clarivate Helix, and where the gaps are
 - **`@cdx/theme-ag-grid`**, **`@cdx/branding`** — grid theme and the Clarivate logo/header/footer.
 
 ## Method & the hard ceiling
-Every value is cross-checked against the sources above. What we **cannot** do is a pixel diff against a live Helix render: the Storybook (`cdx-stories.prod.sp.aws.clarivate.net`) is 403 even on VPN, and the `@cdx` SCSS only specifies a subset of per-component styling. And MUI (Material-2 DOM) vs Angular Material (Material-3 / MDC DOM) can never be byte-identical. Target: **visually indistinguishable**, not identical markup.
+Every value is cross-checked against the sources above. There is **no usable Helix Storybook** — Supernova lists story metadata, but it points at `cdx-stories.prod…` which is 403 (CloudFront/SSO) even on VPN. Reference renders we *do* use: **Figma component thumbnails** (rendered design images) and the **compiled `@cdx` component CSS**. A full pixel diff would require **running the Angular reference app** (`helix-reference-app`) to render the real components — not Storybook. And MUI (Material-2 DOM) vs Angular Material (Material-3 / MDC DOM) can never be byte-identical. Target: **visually indistinguishable**, not identical markup.
 
 ## Foundations — verified exact
 | Aspect | Status |
@@ -80,5 +80,5 @@ Reconciled against all three Supernova sources: **Figma component specs** (~50),
 
 ## Known gaps / not done
 - **Dark mode + invert theme** (`$helix-dark-theme`) — deferred.
-- Tier-2 → Tier-1 requires a **Helix reference render** (Storybook export or screenshots) for a true visual diff.
+- Tier-2 → Tier-1 for a true *pixel* diff would require **running the Angular reference app** to render the real components side by side (there is no Helix Storybook). Spec-level fidelity is already verified against Figma specs + `@cdx` component CSS.
 - Header/Footer now match the `@cdx/ngx-branding` component structure (two-tier header, black copyright-first footer); remaining differences are sub-pixel MDC-vs-MUI DOM only.
